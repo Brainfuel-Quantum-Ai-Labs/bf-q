@@ -1,7 +1,7 @@
 # BrainFuel Quantum AI Labs
 
 **Website:** [https://www.bf-q.com](https://www.bf-q.com)  
-**Founder:** Mohsin Agwan · Navi Mumbai, India
+**Founder:** Mohsin Agwan · Reseacher & Founder - Mumbai, India
 
 Pioneering the convergence of quantum computing, artificial intelligence, and blockchain technologies — building tomorrow's intelligence infrastructure today.
 
