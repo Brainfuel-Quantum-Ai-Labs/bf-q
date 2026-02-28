@@ -9,7 +9,7 @@ Pioneering the convergence of quantum computing, artificial intelligence, and bl
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 15 (App Router)
 - **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS + CSS Variables (dark mode by default)
 - **Database:** PostgreSQL via Prisma ORM
@@ -20,15 +20,22 @@ Pioneering the convergence of quantum computing, artificial intelligence, and bl
 
 ---
 
-## Quickstart
+## Local Development
+
+### Prerequisites
+
+- Node.js 20+
+- Docker & Docker Compose
 
 ### 1. Clone & install
 
 ```bash
-git clone https://github.com/bf-q/bf-q.git
+git clone https://github.com/Brainfuel-Quantum-Ai-Labs/bf-q.git
 cd bf-q
 npm install
 ```
+
+`npm install` automatically runs `prisma generate` via the `postinstall` hook.
 
 ### 2. Configure environment
 
@@ -36,34 +43,82 @@ npm install
 cp .env.example .env.local
 ```
 
-Edit `.env.local` with your actual values:
+The default `.env.example` already points to the local Docker database — no edits needed for local dev unless you change passwords.
 
-| Variable | Description |
-|---|---|
-| `DATABASE_URL` | PostgreSQL connection string |
-| `NEXTAUTH_URL` | App URL (e.g. `http://localhost:3000`) |
-| `NEXTAUTH_SECRET` | Random 32+ char secret (`openssl rand -base64 32`) |
-| `GOOGLE_CLIENT_ID` | Google OAuth client ID |
-| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
-| `LINKEDIN_CLIENT_ID` | LinkedIn OAuth client ID |
-| `LINKEDIN_CLIENT_SECRET` | LinkedIn OAuth client secret |
-| `NEXT_PUBLIC_APP_URL` | Public app URL |
-
-### 3. Database setup
+### 3. Start local Postgres
 
 ```bash
-npm run db:push
-npm run db:generate
-npm run db:seed
+docker compose up -d
 ```
 
-### 4. Run development server
+This starts a PostgreSQL 16 container on port 5432 with database `bfq_db`.
+
+### 4. Run migrations & seed
+
+```bash
+npm run db:migrate   # create/apply migrations (requires live DB)
+npm run db:seed      # seed sample projects, products, and posts
+```
+
+### 5. Start the dev server
 
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Deploy on Vercel
+
+### Environment Variables
+
+Set the following in **Vercel → Project → Settings → Environment Variables**:
+
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | PostgreSQL connection string. For **Vercel Postgres**: use the `POSTGRES_PRISMA_URL` value (PgBouncer pooled). |
+| `NEXTAUTH_URL` | Your deployed URL, e.g. `https://www.bf-q.com` |
+| `NEXTAUTH_SECRET` | Random 32+ char secret — generate with `openssl rand -base64 32` |
+| `GOOGLE_CLIENT_ID` | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
+| `LINKEDIN_CLIENT_ID` | LinkedIn OAuth client ID |
+| `LINKEDIN_CLIENT_SECRET` | LinkedIn OAuth client secret |
+| `NEXT_PUBLIC_APP_URL` | Public app URL, e.g. `https://www.bf-q.com` |
+
+### Using Vercel Postgres (recommended)
+
+1. Go to **Vercel → Storage → Create Database → Postgres**.
+2. Connect the database to your project.
+3. Vercel auto-injects `POSTGRES_*` variables. Set:
+   - `DATABASE_URL` = value of `POSTGRES_PRISMA_URL`
+4. Run migrations from your local machine (using the direct connection string):
+   ```bash
+   DATABASE_URL="<POSTGRES_URL_NON_POOLING>" npm run db:deploy
+   npm run db:seed
+   ```
+
+### Build command
+
+Vercel's default `npm run build` works. The `postinstall` hook runs `prisma generate` automatically before the build — no extra build command configuration needed.
+
+---
+
+## Available Scripts
+
+| Script | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | ESLint check |
+| `npm run format` | Prettier format |
+| `npm run db:generate` | Generate Prisma client |
+| `npm run db:push` | Push schema to DB (no migrations) |
+| `npm run db:migrate` | Create & apply dev migrations |
+| `npm run db:deploy` | Apply pending migrations (CI/prod) |
+| `npm run db:seed` | Seed database with sample data |
 
 ---
 
@@ -74,6 +129,7 @@ src/
 ├── app/                    # Next.js App Router pages & API routes
 │   ├── api/                # REST API endpoints
 │   │   ├── auth/           # NextAuth + registration
+│   │   ├── health/         # Health check endpoint (no DB)
 │   │   ├── projects/       # CRUD projects
 │   │   ├── products/       # CRUD products
 │   │   ├── posts/          # CRUD posts
@@ -99,40 +155,7 @@ src/
 prisma/
 ├── schema.prisma
 └── seed.ts
-```
-
----
-
-## Available Scripts
-
-| Script | Description |
-|---|---|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | ESLint check |
-| `npm run format` | Prettier format |
-| `npm run db:generate` | Generate Prisma client |
-| `npm run db:push` | Push schema to DB |
-| `npm run db:migrate` | Run Prisma migrations |
-| `npm run db:seed` | Seed database |
-
----
-
-## Deploy on Vercel
-
-1. Install Vercel CLI: `npm i -g vercel`
-2. Run `vercel` and follow prompts
-3. Set environment variables from `.env.example` in Project Settings
-4. Run `vercel --prod`
-
-Use [Neon](https://neon.tech), [Supabase](https://supabase.com), or [Railway](https://railway.app) for PostgreSQL.
-
-After setting `DATABASE_URL`:
-
-```bash
-npx prisma migrate deploy
-npx prisma db seed
+docker-compose.yml           # Local Postgres dev environment
 ```
 
 ---
@@ -154,6 +177,7 @@ npx prisma db seed
 
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
+| GET | `/api/health` | Public | Health check |
 | GET | `/api/projects` | Public | List projects |
 | POST | `/api/projects` | Admin | Create project |
 | GET/PUT/DELETE | `/api/projects/:id` | Public/Admin | Project CRUD |
@@ -166,6 +190,28 @@ npx prisma db seed
 
 ---
 
+## Troubleshooting
+
+### `PrismaClientInitializationError` on Vercel
+
+**Root cause:** Prisma client is not generated before `next build`.  
+**Fix:** The `postinstall` script (`prisma generate`) in `package.json` runs automatically after `npm install` on Vercel, generating the client before the build starts. Ensure `prisma` is in `devDependencies`.
+
+### Build fails with "Failed to collect page data"
+
+**Root cause:** A page or API route attempted a Prisma query at build time with no DB.  
+**Fix:** All DB-backed pages use `export const dynamic = "force-dynamic"` and wrap DB calls in `try/catch`. API routes are dynamically rendered by default when they reference request-scoped data.
+
+### `DATABASE_URL` is not defined
+
+Set it in `.env.local` for local dev (copy `.env.example`), or in Vercel environment variables for production.
+
+### Migrations fail on Vercel Postgres
+
+Vercel Postgres uses PgBouncer (connection pooling) which is incompatible with `prisma migrate`. Run migrations from your local machine using the direct (non-pooled) connection string (`POSTGRES_URL_NON_POOLING`).
+
+---
+
 ## License
 
-Proprietary — © 2025 BrainFuel Quantum AI Labs. All rights reserved.�
+Proprietary — © 2025 BrainFuel Quantum AI Labs. All rights reserved.
