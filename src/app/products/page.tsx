@@ -7,38 +7,38 @@ import { Badge } from "@/components/ui/Badge";
 import { ArrowRight, CheckCircle2, ExternalLink, Layers } from "lucide-react";
 
 const categoryGradients: Record<string, string> = {
-  "AI Platform": "from-quantum-800 to-quantum-600",
-  Blockchain: "from-green-900 to-green-700",
-  "Developer Tools": "from-purple-900 to-purple-700",
-  Security: "from-red-900 to-red-700",
+  "AI Platform": "from-quantum-600 to-quantum-500",
+  Blockchain: "from-green-600 to-green-500",
+  "Developer Tools": "from-purple-600 to-purple-500",
+  Security: "from-red-600 to-red-500",
 };
 
 const categoryBorders: Record<string, string> = {
-  "AI Platform": "border-quantum-800/40 hover:border-quantum-600/60",
-  Blockchain: "border-green-800/40 hover:border-green-600/60",
-  "Developer Tools": "border-purple-800/40 hover:border-purple-600/60",
-  Security: "border-red-800/40 hover:border-red-600/60",
+  "AI Platform": "border-quantum-200 hover:border-quantum-400 shadow-sm",
+  Blockchain: "border-green-200 hover:border-green-400 shadow-sm",
+  "Developer Tools": "border-purple-200 hover:border-purple-400 shadow-sm",
+  Security: "border-red-200 hover:border-red-400 shadow-sm",
 };
 
 const categoryIconColors: Record<string, string> = {
-  "AI Platform": "text-quantum-400",
-  Blockchain: "text-green-400",
-  "Developer Tools": "text-purple-400",
-  Security: "text-red-400",
+  "AI Platform": "text-quantum-600",
+  Blockchain: "text-green-600",
+  "Developer Tools": "text-purple-600",
+  Security: "text-red-600",
 };
 
 const categoryTabActive: Record<string, string> = {
-  "AI Platform": "bg-sky-900/50 border-sky-600/60 text-sky-300 scale-105",
-  Blockchain: "bg-green-900/50 border-green-600/60 text-green-300 scale-105",
-  "Developer Tools": "bg-purple-900/50 border-purple-600/60 text-purple-300 scale-105",
-  Security: "bg-red-900/50 border-red-600/60 text-red-300 scale-105",
+  "AI Platform": "bg-sky-100 border-sky-400 text-sky-700 scale-105",
+  Blockchain: "bg-green-100 border-green-400 text-green-700 scale-105",
+  "Developer Tools": "bg-purple-100 border-purple-400 text-purple-700 scale-105",
+  Security: "bg-red-100 border-red-400 text-red-700 scale-105",
 };
 
 const categoryTabIdle: Record<string, string> = {
-  "AI Platform": "bg-sky-950/20 border-sky-900/40 text-sky-500 hover:border-sky-700/60",
-  Blockchain: "bg-green-950/20 border-green-900/40 text-green-500 hover:border-green-700/60",
-  "Developer Tools": "bg-purple-950/20 border-purple-900/40 text-purple-500 hover:border-purple-700/60",
-  Security: "bg-red-950/20 border-red-900/40 text-red-500 hover:border-red-700/60",
+  "AI Platform": "bg-white border-gray-200 text-gray-600 hover:border-sky-300",
+  Blockchain: "bg-white border-gray-200 text-gray-600 hover:border-green-300",
+  "Developer Tools": "bg-white border-gray-200 text-gray-600 hover:border-purple-300",
+  Security: "bg-white border-gray-200 text-gray-600 hover:border-red-300",
 };
 
 const categoryGlow: Record<string, string> = {
@@ -85,15 +85,13 @@ export default function ProductsPage() {
     <div className="pt-16">
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-quantum-600/6 blur-[140px]" />
-          <div className="absolute top-0 left-0 w-[350px] h-[350px] rounded-full bg-purple-900/8 blur-[100px]" />
-          <div className="absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-green-900/6 blur-[100px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-quantum-400 animate-pulse" />
               Production-Ready Tools
             </div>
@@ -113,13 +111,13 @@ export default function ProductsPage() {
               onClick={() => setActiveCategory("ALL")}
               className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border text-sm font-medium transition-all duration-200 ${
                 activeCategory === "ALL"
-                  ? "bg-quantum-900/50 border-quantum-600/60 text-quantum-300 scale-105"
-                  : "bg-quantum-950/20 border-quantum-900/40 text-quantum-500 hover:border-quantum-700/60"
+                  ? "bg-quantum-100 border-quantum-400 text-quantum-700 scale-105"
+                  : "bg-white border-gray-200 text-gray-600 hover:border-quantum-300"
               }`}
             >
               <Layers className="w-4 h-4" />
               All Products
-              <span className={`px-1.5 py-0.5 rounded-md text-xs font-bold ${activeCategory === "ALL" ? "bg-white/20" : "bg-white/10"}`}>
+              <span className={`px-1.5 py-0.5 rounded-md text-xs font-bold ${activeCategory === "ALL" ? "bg-white/50" : "bg-gray-100"}`}>
                 {products.length}
               </span>
             </button>
@@ -129,12 +127,12 @@ export default function ProductsPage() {
                 onClick={() => setActiveCategory(cat)}
                 className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border text-sm font-medium transition-all duration-200 ${
                   activeCategory === cat
-                    ? (categoryTabActive[cat] ?? "bg-quantum-900/50 border-quantum-600/60 text-quantum-300 scale-105")
-                    : (categoryTabIdle[cat] ?? "bg-quantum-950/20 border-quantum-900/40 text-quantum-500 hover:border-quantum-700/60")
+                    ? (categoryTabActive[cat] ?? "bg-quantum-100 border-quantum-400 text-quantum-700 scale-105")
+                    : (categoryTabIdle[cat] ?? "bg-white border-gray-200 text-gray-600 hover:border-quantum-300")
                 }`}
               >
                 {cat}
-                <span className={`px-1.5 py-0.5 rounded-md text-xs font-bold ${activeCategory === cat ? "bg-white/20" : "bg-white/10"}`}>
+                <span className={`px-1.5 py-0.5 rounded-md text-xs font-bold ${activeCategory === cat ? "bg-white/50" : "bg-gray-100"}`}>
                   {products.filter((p) => p.category === cat).length}
                 </span>
               </button>
@@ -147,28 +145,28 @@ export default function ProductsPage() {
             if (catProducts.length === 0) return null;
             return (
               <div key={cat} className="mb-20">
-                <div className="flex items-center gap-3 mb-8 pb-3 border-b border-white/10">
-                  <h2 className={`text-xl font-semibold ${categoryIconColors[cat] ?? "text-quantum-400"}`}>
+                <div className="flex items-center gap-3 mb-8 pb-3 border-b border-gray-200">
+                  <h2 className={`text-xl font-semibold ${categoryIconColors[cat] ?? "text-quantum-600"}`}>
                     {cat}
                   </h2>
-                  <span className="px-2 py-0.5 text-xs rounded-full bg-white/10 text-muted-foreground">
+                  <span className="px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-600">
                     {catProducts.length}
                   </span>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   {catProducts.map((product) => {
                     const sp = staticProducts.find((s) => s.slug === product.slug);
-                    const glow = categoryGlow[cat] ?? "rgba(14,165,233,0.14)";
+                    const glow = categoryGlow[cat] ?? "rgba(14,165,233,0.08)";
                     return (
                       <Link key={product.id} href={`/products/${product.slug}`} className="group block">
                         <div
                           className={`rounded-2xl border overflow-hidden h-full transition-all duration-300 group-hover:scale-[1.01] card-hover-glow ${
-                            categoryBorders[cat] ?? "border-white/10"
-                          } bg-card`}
+                            categoryBorders[cat] ?? "border-gray-200"
+                          } bg-white shadow-sm`}
                           style={{ "--glow-color": glow } as React.CSSProperties}
                         >
                           {/* Card header gradient */}
-                          <div className={`h-32 bg-gradient-to-br ${categoryGradients[cat] ?? "from-quantum-800 to-quantum-600"} relative`}>
+                          <div className={`h-32 bg-gradient-to-br ${categoryGradients[cat] ?? "from-quantum-600 to-quantum-500"} relative`}>
                             <div className="absolute inset-0 flex items-center justify-center opacity-10">
                               <span className="text-white text-7xl font-black">BF-Q</span>
                             </div>
@@ -184,7 +182,7 @@ export default function ProductsPage() {
 
                           {/* Card body */}
                           <div className="p-6">
-                            <h3 className="text-xl font-bold mb-2 group-hover:text-quantum-300 transition-colors">
+                            <h3 className="text-xl font-bold mb-2 group-hover:text-quantum-600 transition-colors">
                               {product.title}
                             </h3>
                             <p className="text-sm text-muted-foreground leading-relaxed mb-5">
@@ -223,10 +221,7 @@ export default function ProductsPage() {
           })}
 
           {/* CTA */}
-          <div className="mt-8 text-center p-12 rounded-2xl border border-quantum-800/30 bg-quantum-950/20 relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-quantum-600/10 blur-[60px]" />
-            </div>
+          <div className="mt-8 text-center p-12 rounded-2xl border border-gray-200 bg-gray-50 relative overflow-hidden">
             <div className="relative">
               <h2 className="text-2xl font-bold mb-3">
                 Need a <span className="gradient-text">Custom Solution</span>?
@@ -237,7 +232,7 @@ export default function ProductsPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg shadow-quantum-900/30"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg"
               >
                 Talk to Sales <ArrowRight className="w-5 h-5" />
               </Link>

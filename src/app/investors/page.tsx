@@ -44,11 +44,11 @@ export default function InvestorsPage() {
       {/* Hero */}
       <section className="py-24 relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-quantum-600/8 blur-[120px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-quantum-50/20 to-transparent" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-sm mb-6">
               <TrendingUp className="w-3 h-3" /> Investor Relations
             </div>
             <h1 className="text-5xl sm:text-6xl font-bold mb-6">
@@ -67,7 +67,7 @@ export default function InvestorsPage() {
               </Link>
               <Link
                 href="/research"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-quantum-700 text-quantum-400 font-semibold hover:bg-quantum-950/50 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-quantum-300 text-quantum-600 font-semibold hover:bg-quantum-50 transition-colors"
               >
                 Read Our Research
               </Link>
@@ -81,9 +81,9 @@ export default function InvestorsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
             {metrics.map(({ label, value, sub }) => (
-              <div key={label} className="p-6 rounded-xl border border-white/10 bg-card text-center">
+              <div key={label} className="p-6 rounded-xl border border-gray-200 bg-white text-center shadow-sm">
                 <div className="text-3xl font-black gradient-text mb-1">{value}</div>
-                <div className="text-xs text-quantum-400 font-medium mb-1">{sub}</div>
+                <div className="text-xs text-quantum-600 font-medium mb-1">{sub}</div>
                 <div className="text-xs text-muted-foreground leading-snug">{label}</div>
               </div>
             ))}
@@ -120,8 +120,8 @@ export default function InvestorsPage() {
                 text: "API usage pricing, enterprise SaaS subscriptions, SDK licensing, and R&D consulting engagements provide diversified, recurring revenue streams.",
               },
             ].map(({ icon: Icon, title, text }) => (
-              <div key={title} className="p-8 rounded-xl border border-white/10 bg-card">
-                <Icon className="w-8 h-8 text-quantum-400 mb-4" />
+              <div key={title} className="p-8 rounded-xl border border-gray-200 bg-white shadow-sm">
+                <Icon className="w-8 h-8 text-quantum-600 mb-4" />
                 <h3 className="text-xl font-semibold mb-3">{title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{text}</p>
               </div>
@@ -133,7 +133,7 @@ export default function InvestorsPage() {
       {/* Governance */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="p-8 md:p-12 rounded-2xl border border-quantum-800/40 bg-quantum-950/20">
+          <div className="p-8 md:p-12 rounded-2xl border border-gray-200 bg-gray-50">
             <h2 className="text-3xl font-bold mb-6">
               Governance &amp; <span className="gradient-text">Transparency</span>
             </h2>
@@ -145,7 +145,7 @@ export default function InvestorsPage() {
               ].map(({ label, value }) => (
                 <div key={label}>
                   <p className="text-sm text-muted-foreground mb-1">{label}</p>
-                  <p className="font-semibold text-quantum-300">{value}</p>
+                  <p className="font-semibold text-quantum-700">{value}</p>
                 </div>
               ))}
             </div>
@@ -175,10 +175,10 @@ export default function InvestorsPage() {
             {dueDiligence.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="p-6 rounded-xl border border-white/10 bg-card flex items-start gap-4"
+                className="p-6 rounded-xl border border-gray-200 bg-white shadow-sm flex items-start gap-4"
               >
-                <div className="w-10 h-10 rounded-lg bg-quantum-950/60 border border-quantum-800/40 flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-5 h-5 text-quantum-400" />
+                <div className="w-10 h-10 rounded-lg bg-quantum-50 border border-quantum-200 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-5 h-5 text-quantum-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">{title}</h3>

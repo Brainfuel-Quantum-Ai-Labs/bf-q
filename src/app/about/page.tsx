@@ -71,13 +71,12 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-quantum-600/8 blur-[140px]" />
-          <div className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full bg-purple-900/8 blur-[100px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-quantum-50/20 to-transparent" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-3xl mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-sm mb-6">
               <MapPin className="w-3 h-3" /> Navi Mumbai, India
             </div>
             <h1 className="text-5xl sm:text-6xl font-bold mb-6">
@@ -97,8 +96,8 @@ export default function AboutPage() {
                 onClick={() => setActiveTab(key)}
                 className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all duration-200 ${
                   activeTab === key
-                    ? "bg-quantum-900/50 border-quantum-600/60 text-quantum-300 scale-105 shadow-lg"
-                    : "bg-quantum-950/20 border-quantum-900/40 text-quantum-500 hover:border-quantum-700/60 hover:scale-105"
+                    ? "bg-quantum-100 border-quantum-400 text-quantum-700 scale-105 shadow-sm"
+                    : "bg-white border-gray-200 text-gray-600 hover:border-quantum-300 hover:scale-105"
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -115,25 +114,25 @@ export default function AboutPage() {
                   icon: Target,
                   title: "Our Mission",
                   text: "To pioneer the convergence of quantum computing, artificial intelligence, and blockchain — delivering transformative technology infrastructure that empowers the next generation of innovators.",
-                  color: "text-quantum-400",
-                  bg: "bg-quantum-950/40 border-quantum-800/40",
-                  glow: "rgba(14,165,233,0.12)",
+                  color: "text-quantum-600",
+                  bg: "bg-quantum-50 border-quantum-200",
+                  glow: "rgba(14,165,233,0.08)",
                 },
                 {
                   icon: Eye,
                   title: "Our Vision",
                   text: "A world where quantum-powered intelligence is as accessible as cloud computing today — where every enterprise can harness the full computational potential of nature itself.",
-                  color: "text-purple-400",
-                  bg: "bg-purple-950/40 border-purple-800/40",
-                  glow: "rgba(168,85,247,0.12)",
+                  color: "text-purple-600",
+                  bg: "bg-purple-50 border-purple-200",
+                  glow: "rgba(168,85,247,0.08)",
                 },
                 {
                   icon: Lightbulb,
                   title: "Our Values",
                   text: "Radical transparency, first-principles thinking, open collaboration, and an unwavering commitment to the long-term benefit of humanity through responsible AI development.",
-                  color: "text-green-400",
-                  bg: "bg-green-950/40 border-green-800/40",
-                  glow: "rgba(34,197,94,0.12)",
+                  color: "text-green-600",
+                  bg: "bg-green-50 border-green-200",
+                  glow: "rgba(34,197,94,0.08)",
                 },
               ].map(({ icon: Icon, title, text, color, bg, glow }) => (
                 <div
@@ -182,8 +181,8 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="p-8 rounded-2xl border border-quantum-800/40 bg-quantum-950/20"
-                style={{ boxShadow: "0 0 60px rgba(14,165,233,0.10)" }}
+              <div className="p-8 rounded-2xl border border-quantum-200 bg-quantum-50"
+                style={{ boxShadow: "0 0 60px rgba(14,165,233,0.06)" }}
               >
                 <div className="flex items-start gap-4 mb-6">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-quantum-400 to-quantum-600 flex items-center justify-center text-2xl font-bold text-white flex-shrink-0">
@@ -197,14 +196,14 @@ export default function AboutPage() {
                     </p>
                   </div>
                 </div>
-                <blockquote className="text-muted-foreground leading-relaxed italic border-l-2 border-quantum-600 pl-4 mb-6">
+                <blockquote className="text-muted-foreground leading-relaxed italic border-l-2 border-quantum-400 pl-4 mb-6">
                   &quot;We are not just building products — we are building the foundation upon which
                   the next civilisation of intelligent systems will be constructed. The quantum era
                   is not a distant future; it is the work we do today.&quot;
                 </blockquote>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 text-sm text-quantum-400 hover:text-quantum-300 font-medium transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-quantum-600 hover:text-quantum-700 font-medium transition-colors"
                 >
                   Connect with Mohsin <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -219,13 +218,13 @@ export default function AboutPage() {
                 Our <span className="gradient-text">Journey</span>
               </h2>
               <div className="relative">
-                <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-quantum-500 via-quantum-700 to-quantum-900" />
+                <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-quantum-400 via-quantum-200 to-gray-100" />
                 <div className="space-y-8">
                   {milestones.map((m, i) => {
                     const isLatest = i === milestones.length - 1;
                     const dotClass = isLatest
                       ? "bg-quantum-400 border-quantum-400 animate-pulse"
-                      : "bg-background border-quantum-600";
+                      : "bg-white border-quantum-400";
                     return (
                     <div key={m.title} className="relative flex gap-8 items-start">
                       <div className="relative z-10 flex-shrink-0 w-16 flex flex-col items-center">
@@ -233,7 +232,7 @@ export default function AboutPage() {
                         <span className="text-xs text-quantum-400 font-bold mt-2">{m.year}</span>
                       </div>
                       <div
-                        className="flex-grow p-5 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/50 transition-all duration-200 hover:scale-[1.005] card-hover-glow"
+                        className="flex-grow p-5 rounded-2xl border border-gray-200 bg-white hover:border-quantum-300 shadow-sm transition-all duration-200 hover:scale-[1.005] card-hover-glow"
                       >
                         <h3 className="font-semibold mb-1.5">{m.title}</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">{m.description}</p>
@@ -256,12 +255,12 @@ export default function AboutPage() {
                 {techStack.map(({ category, items }) => (
                   <div
                     key={category}
-                    className="p-6 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/40 transition-all duration-200 card-hover-glow"
+                    className="p-6 rounded-2xl border border-gray-200 bg-white hover:border-quantum-300 shadow-sm transition-all duration-200 card-hover-glow"
                   >
-                    <h3 className="text-sm font-semibold uppercase tracking-widest text-quantum-400 mb-4">{category}</h3>
+                    <h3 className="text-sm font-semibold uppercase tracking-widest text-quantum-600 mb-4">{category}</h3>
                     <div className="flex flex-wrap gap-2">
                       {items.map((item) => (
-                        <span key={item} className="px-3 py-1.5 text-xs rounded-lg border border-white/10 bg-white/5 font-mono text-muted-foreground hover:border-quantum-700/50 hover:text-foreground transition-colors">
+                        <span key={item} className="px-3 py-1.5 text-xs rounded-lg border border-gray-200 bg-gray-50 font-mono text-gray-600 hover:border-quantum-300 hover:text-gray-900 transition-colors">
                           {item}
                         </span>
                       ))}
@@ -282,7 +281,7 @@ export default function AboutPage() {
                 {values.map((v, i) => (
                   <div
                     key={v.title}
-                    className="p-6 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/40 transition-all duration-200 hover:scale-[1.01] card-hover-glow"
+                    className="p-6 rounded-2xl border border-gray-200 bg-white hover:border-quantum-300 shadow-sm transition-all duration-200 hover:scale-[1.01] card-hover-glow"
                   >
                     <div className="text-3xl font-black gradient-text mb-3">{String(i + 1).padStart(2, "0")}</div>
                     <h3 className="font-semibold mb-2">{v.title}</h3>
@@ -294,10 +293,7 @@ export default function AboutPage() {
           )}
 
           {/* CTA */}
-          <div className="mt-16 text-center p-12 rounded-3xl border border-quantum-800/30 bg-quantum-950/20 relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-quantum-600/10 blur-[60px]" />
-            </div>
+          <div className="mt-16 text-center p-12 rounded-3xl border border-gray-200 bg-gray-50 relative overflow-hidden">
             <div className="relative">
               <h2 className="text-2xl font-bold mb-3">
                 Join the <span className="gradient-text">Quantum Era</span>
@@ -315,7 +311,7 @@ export default function AboutPage() {
                 </Link>
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-sm font-semibold transition-all"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50 text-sm font-semibold transition-all"
                 >
                   Explore Services
                 </Link>

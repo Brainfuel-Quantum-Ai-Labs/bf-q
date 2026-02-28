@@ -11,28 +11,28 @@ const products = [
     category: "AI Platform",
     slug: "bf-q-inference-api",
     description: "High-throughput REST API for deploying and scaling custom AI models with sub-millisecond latency.",
-    gradient: "from-quantum-800 to-quantum-600",
+    gradient: "from-quantum-600 to-quantum-500",
   },
   {
     title: "QuantumLedger SDK",
     category: "Blockchain",
     slug: "quantumledger-sdk",
     description: "Open-source SDK for building quantum-resistant blockchain applications with post-quantum cryptography.",
-    gradient: "from-green-900 to-green-700",
+    gradient: "from-green-600 to-green-500",
   },
   {
     title: "NeuroCraft Studio",
     category: "Developer Tools",
     slug: "neurocraft-studio",
     description: "Visual IDE for designing, training, and deploying neural network architectures with real-time profiling.",
-    gradient: "from-purple-900 to-purple-700",
+    gradient: "from-purple-600 to-purple-500",
   },
   {
     title: "SecureVault Enterprise",
     category: "Security",
     slug: "securevault-enterprise",
     description: "Enterprise-grade secrets management with AI-driven threat detection and automated certificate lifecycle.",
-    gradient: "from-red-900 to-red-700",
+    gradient: "from-red-600 to-red-500",
   },
 ];
 
@@ -61,14 +61,14 @@ export function ProductSlider() {
           <div className="flex gap-2">
             <button
               onClick={scrollPrev}
-              className="p-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors"
+              className="p-2 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors"
               aria-label="Previous"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={scrollNext}
-              className="p-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors"
+              className="p-2 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors"
               aria-label="Next"
             >
               <ChevronRight className="w-5 h-5" />
@@ -80,7 +80,7 @@ export function ProductSlider() {
           <div className="flex gap-6">
             {products.map((product) => (
               <div key={product.slug} className="flex-none w-[320px] sm:w-[380px]">
-                <div className="rounded-xl border border-white/10 overflow-hidden h-full group hover:border-quantum-700/50 transition-colors">
+                <div className="rounded-xl border border-gray-200 overflow-hidden h-full group hover:border-quantum-300 transition-colors">
                   <div className={`h-40 bg-gradient-to-br ${product.gradient} relative`}>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="text-white/20 text-6xl font-bold">BF-Q</span>
@@ -98,7 +98,7 @@ export function ProductSlider() {
                     </p>
                     <Link
                       href={`/products/${product.slug}`}
-                      className="inline-flex items-center gap-1 text-sm text-quantum-400 hover:text-quantum-300 font-medium transition-colors"
+                      className="inline-flex items-center gap-1 text-sm text-quantum-600 hover:text-quantum-700 font-medium transition-colors"
                     >
                       Learn more <ExternalLink className="w-3 h-3" />
                     </Link>

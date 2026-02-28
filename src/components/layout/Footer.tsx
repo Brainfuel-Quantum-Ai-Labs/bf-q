@@ -25,7 +25,7 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-background">
+    <footer className="border-t border-gray-200 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
@@ -45,7 +45,7 @@ export function Footer() {
                 href="https://github.com/bf-q"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
+                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-gray-100 transition-colors"
                 aria-label="GitHub"
               >
                 <Github className="w-4 h-4" />
@@ -54,7 +54,7 @@ export function Footer() {
                 href="https://linkedin.com/company/bf-q"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
+                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-gray-100 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
@@ -63,14 +63,14 @@ export function Footer() {
                 href="https://twitter.com/bfqlabs"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
+                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-gray-100 transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="w-4 h-4" />
               </a>
               <a
                 href="mailto:hello@bf-q.com"
-                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
+                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-gray-100 transition-colors"
                 aria-label="Email"
               >
                 <Mail className="w-4 h-4" />
@@ -87,7 +87,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-quantum-400 transition-colors"
+                      className="text-sm text-muted-foreground hover:text-quantum-600 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -98,13 +98,13 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} BrainFuel Quantum AI Labs. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
             Founded by{" "}
-            <span className="text-quantum-400 font-medium">Mohsin Agwan</span> · Navi Mumbai,
+            <span className="text-quantum-600 font-medium">Mohsin Agwan</span> · Navi Mumbai,
             India
           </p>
         </div>
