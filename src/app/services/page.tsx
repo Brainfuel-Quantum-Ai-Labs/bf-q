@@ -184,7 +184,7 @@ const services = [
   },
 ];
 
-const process = [
+const processSteps = [
   { step: "01", title: "Discovery Call", icon: Sparkles, desc: "30-minute session to understand your use case, constraints, and goals." },
   { step: "02", title: "Technical Assessment", icon: Atom, desc: "Our engineers analyse feasibility, define scope, and produce a delivery roadmap." },
   { step: "03", title: "Proposal & SOW", icon: Network, desc: "Fixed-price or time-and-materials statement of work with clear milestones." },
@@ -348,7 +348,7 @@ export default function ServicesPage() {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {process.map(({ step, title, desc, icon: Icon }) => (
+              {processSteps.map(({ step, title, desc, icon: Icon }) => (
                 <div key={step} className="p-6 rounded-2xl border border-gray-200 bg-white shadow-sm text-center hover:border-quantum-300 transition-colors">
                   <div className="w-10 h-10 rounded-xl bg-quantum-50 border border-quantum-200 flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-5 h-5 text-quantum-600" />

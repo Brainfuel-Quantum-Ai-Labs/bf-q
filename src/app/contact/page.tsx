@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Mail, MapPin, Github, Linkedin, Twitter, Send } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 
-export default function ContactPage() {
+function ContactForm() {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,6 +16,18 @@ export default function ContactPage() {
     message: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  useEffect(() => {
+    const toLabel = (slug: string) =>
+      slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    const service = searchParams.get("service");
+    const partnership = searchParams.get("partnership");
+    if (service) {
+      setFormData((prev) => ({ ...prev, subject: `Enquiry: ${toLabel(service)}` }));
+    } else if (partnership) {
+      setFormData((prev) => ({ ...prev, subject: `Partnership: ${toLabel(partnership)}` }));
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +49,80 @@ export default function ContactPage() {
     }
   };
 
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Name</label>
+          <Input
+            placeholder="Your name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
+          />
+        </div>
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Email</label>
+          <Input
+            type="email"
+            placeholder="your@email.com"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            required
+          />
+        </div>
+      </div>
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Subject</label>
+        <Input
+          placeholder="How can we help?"
+          value={formData.subject}
+          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+          required
+        />
+      </div>
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Message</label>
+        <Textarea
+          placeholder="Tell us about your project or inquiry..."
+          rows={6}
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          required
+        />
+      </div>
+
+      {status === "success" && (
+        <div className="p-4 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm">
+          ✓ Message sent! We will get back to you within 24 hours.
+        </div>
+      )}
+      {status === "error" && (
+        <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+          Something went wrong. Please try again or email us directly.
+        </div>
+      )}
+
+      <Button
+        type="submit"
+        variant="quantum"
+        size="lg"
+        className="w-full"
+        disabled={status === "loading"}
+      >
+        {status === "loading" ? (
+          "Sending..."
+        ) : (
+          <>
+            Send Message <Send className="w-4 h-4" />
+          </>
+        )}
+      </Button>
+    </form>
+  );
+}
+
+export default function ContactPage() {
   return (
     <div className="pt-16">
       <section className="py-24">
@@ -104,75 +192,9 @@ export default function ContactPage() {
 
             {/* Form */}
             <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Name</label>
-                    <Input
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Email</label>
-                    <Input
-                      type="email"
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Subject</label>
-                  <Input
-                    placeholder="How can we help?"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Message</label>
-                  <Textarea
-                    placeholder="Tell us about your project or inquiry..."
-                    rows={6}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    required
-                  />
-                </div>
-
-                {status === "success" && (
-                  <div className="p-4 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm">
-                    ✓ Message sent! We will get back to you within 24 hours.
-                  </div>
-                )}
-                {status === "error" && (
-                  <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
-                    Something went wrong. Please try again or email us directly.
-                  </div>
-                )}
-
-                <Button
-                  type="submit"
-                  variant="quantum"
-                  size="lg"
-                  className="w-full"
-                  disabled={status === "loading"}
-                >
-                  {status === "loading" ? (
-                    "Sending..."
-                  ) : (
-                    <>
-                      Send Message <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </Button>
-              </form>
+              <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-xl" />}>
+                <ContactForm />
+              </Suspense>
             </div>
           </div>
         </div>
