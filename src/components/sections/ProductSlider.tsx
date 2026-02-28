@@ -34,6 +34,13 @@ const products = [
     description: "Enterprise-grade secrets management with AI-driven threat detection and automated certificate lifecycle.",
     gradient: "from-red-600 to-red-500",
   },
+  {
+    title: "Coretex Studio",
+    category: "AI Platform",
+    slug: "coretex-studio",
+    description: "Advanced AI-driven digital studio platform for creative professionals, developers, and enterprises to build, design, and deploy solutions.",
+    gradient: "from-violet-600 to-indigo-500",
+  },
 ];
 
 export function ProductSlider() {

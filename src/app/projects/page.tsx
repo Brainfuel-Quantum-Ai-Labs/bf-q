@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { formatDate } from "@/lib/utils";
 import { staticProjects } from "@/lib/static-data";
-import { ArrowRight, Layers, Zap, Clock, Cpu } from "lucide-react";
+import { ArrowRight, Layers, Zap, Clock, Cpu, Sparkles } from "lucide-react";
 import Link from "next/link";
+
+/** Projects that have a dedicated detail page. */
+const projectsWithDetailPage = new Set(["coretex-studio"]);
 
 const statusConfig = {
   NOW: {
@@ -149,6 +152,63 @@ export default function ProjectsPage() {
             ))}
           </div>
 
+          {/* Featured Showcase */}
+          {projects.some((p) => projectsWithDetailPage.has(p.slug)) && (
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-8 pb-3 border-b border-gray-200">
+                <Sparkles className="w-4 h-4 text-violet-500" />
+                <h2 className="text-xl font-semibold">Featured Showcase</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {projects.filter((p) => projectsWithDetailPage.has(p.slug)).map((project) => (
+                  <Link key={project.id} href={`/projects/${project.slug}`} className="group block">
+                    <div
+                      className="rounded-2xl border border-violet-200 hover:border-violet-400 overflow-hidden transition-all duration-300 group-hover:scale-[1.01] card-hover-glow"
+                      style={{ "--glow-color": "rgba(139,92,246,0.12)" } as React.CSSProperties}
+                    >
+                      {/* Showcase banner */}
+                      <div className="h-36 bg-gradient-to-br from-violet-600 to-indigo-500 relative overflow-hidden">
+                        <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                          <span className="text-white text-8xl font-black tracking-tighter">BF-Q</span>
+                        </div>
+                        <div className="absolute inset-0 flex flex-col items-start justify-end p-5">
+                          <div className="absolute top-4 left-4">
+                            <Badge variant="quantum" className="bg-black/30 border-white/20 text-white">
+                              Active Now
+                            </Badge>
+                          </div>
+                          <div className="absolute top-4 right-4 p-2 rounded-lg bg-black/30 text-white/60 group-hover:text-white transition-colors">
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
+                          {/* Hover overlay highlight text */}
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white/90 text-xs font-medium bg-black/30 px-3 py-1 rounded-full">
+                            Explore Coretex Studio →
+                          </span>
+                        </div>
+                      </div>
+                      {/* Card body */}
+                      <div className="p-6 bg-violet-50">
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          {project.tags.map((tag) => (
+                            <span key={tag} className="px-2.5 py-1 text-xs rounded-full border border-violet-200 bg-violet-50 text-violet-700 font-medium">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <h3 className="text-xl font-bold mb-2 group-hover:text-violet-700 transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {project.summary}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Project groups */}
           {(["NOW", "NEXT", "PIPELINE"] as const).map((status) => {
             const cfg = statusConfig[status];
@@ -185,14 +245,14 @@ export default function ProjectsPage() {
                         ))}
                       </div>
                       <Link
-                        href="/contact"
+                        href={projectsWithDetailPage.has(project.slug) ? `/projects/${project.slug}` : "/contact"}
                         className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
                           status === "NOW" ? "text-green-600 hover:text-green-700" :
                           status === "NEXT" ? "text-yellow-600 hover:text-yellow-700" :
                           "text-quantum-600 hover:text-quantum-700"
                         }`}
                       >
-                        {status === "NOW" ? "Get early access" : status === "NEXT" ? "Join waitlist" : "Learn more"}
+                        {projectsWithDetailPage.has(project.slug) ? "View Project" : status === "NOW" ? "Get early access" : status === "NEXT" ? "Join waitlist" : "Learn more"}
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>

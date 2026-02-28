@@ -122,6 +122,36 @@ export const staticProducts = [
     iconColor: "text-red-400",
     createdAt: new Date("2024-04-01"),
   },
+  {
+    id: "static-5",
+    title: "Coretex Studio",
+    slug: "coretex-studio",
+    category: "AI Platform",
+    summary:
+      "Coretex Studio is an advanced AI-driven digital studio platform designed for creative professionals, developers, and enterprises to build, design, and deploy visual, media, and software solutions seamlessly.",
+    description:
+      "Coretex Studio is a next-generation intelligent studio ecosystem that combines generative AI, interactive development tools, digital content creation systems, and automation frameworks into a unified creative environment. It empowers startups, developers, creative agencies, enterprises, and content creators to ship faster and smarter.",
+    features: [
+      "AI-powered visual content generation",
+      "Brand identity & digital media creation",
+      "UI/UX design and interactive prototyping",
+      "API & backend workflow simulation tools",
+      "Automated marketing content generation",
+      "Developer sandbox & endpoint explorer",
+      "AI-assisted product mockups",
+      "High-performance cloud deployment integration",
+    ],
+    useCases: [
+      "Creative agencies building branded digital experiences",
+      "Developers prototyping AI-powered applications",
+      "Enterprises automating marketing content pipelines",
+      "Startups deploying scalable software ecosystems",
+    ],
+    links: [],
+    gradient: "from-violet-700 to-indigo-600",
+    iconColor: "text-violet-400",
+    createdAt: new Date("2025-01-10"),
+  },
 ];
 
 export const staticProjects = [
@@ -184,6 +214,16 @@ export const staticProjects = [
       "A federated learning framework where model gradient aggregation leverages quantum annealing for optimal convergence guarantees.",
     tags: ["federated-learning", "quantum-annealing", "privacy", "AI"],
     createdAt: new Date("2024-06-01"),
+  },
+  {
+    id: "static-p7",
+    title: "Coretex Studio",
+    slug: "coretex-studio",
+    status: "NOW" as const,
+    summary:
+      "Coretex Studio is an advanced AI-driven digital studio platform designed for creative professionals, developers, and enterprises to build, design, and deploy visual, media, and software solutions seamlessly.",
+    tags: ["AI", "Creative", "Developer Platform"],
+    createdAt: new Date("2025-01-10"),
   },
 ];
 
