@@ -199,7 +199,7 @@ export default function ServicesPage() {
                       <p className={`text-sm ${service.iconColor}`}>{service.subtitle}</p>
                     </div>
                     <ArrowRight
-                      className={`w-5 h-5 flex-shrink-0 text-muted-foreground group-hover:${service.iconColor} group-hover:translate-x-1 transition-all`}
+                      className="w-5 h-5 flex-shrink-0 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all"
                     />
                   </div>
                   <p className="text-muted-foreground leading-relaxed mb-6 text-sm">

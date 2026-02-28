@@ -143,9 +143,7 @@ export default async function ProductsPage() {
 
                           {/* Card body */}
                           <div className="p-6">
-                            <h3
-                              className={`text-xl font-bold mb-2 group-hover:${categoryIconColors[cat] ?? "text-quantum-300"} transition-colors`}
-                            >
+                            <h3 className="text-xl font-bold mb-2 group-hover:text-quantum-300 transition-colors">
                               {product.title}
                             </h3>
                             <p className="text-sm text-muted-foreground leading-relaxed mb-5">

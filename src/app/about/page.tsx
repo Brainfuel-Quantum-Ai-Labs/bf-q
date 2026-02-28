@@ -189,9 +189,7 @@ export default function AboutPage() {
               {milestones.map((m, i) => (
                 <div
                   key={m.title}
-                  className={`relative grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 ${
-                    i % 2 === 0 ? "" : "sm:direction-rtl"
-                  }`}
+                  className="relative grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12"
                 >
                   {/* Left / Right positioning */}
                   {i % 2 === 0 ? (
