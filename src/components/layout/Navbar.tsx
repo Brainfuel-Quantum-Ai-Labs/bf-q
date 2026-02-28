@@ -16,6 +16,7 @@ const navLinks = [
   { href: "/investors", label: "Investors" },
   { href: "/partners", label: "Partners" },
   { href: "/contact", label: "Contact" },
+  { href: "/browser", label: "Browser" },
 ];
 
 export function Navbar() {
