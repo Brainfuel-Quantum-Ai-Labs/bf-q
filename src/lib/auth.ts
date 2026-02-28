@@ -7,6 +7,10 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+  console.error("Missing GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET");
+}
+
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
@@ -14,6 +18,7 @@ const loginSchema = z.object({
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as NextAuthOptions["adapter"],
+  secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
   pages: {
     signIn: "/portal/login",
@@ -49,8 +54,8 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     LinkedInProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID ?? "",
