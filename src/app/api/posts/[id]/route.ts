@@ -12,12 +12,13 @@ const updateSchema = z.object({
 });
 
 interface Params {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function GET(_req: Request, { params }: Params) {
+  const { id } = await params;
   try {
-    const post = await prisma.post.findUnique({ where: { id: params.id } });
+    const post = await prisma.post.findUnique({ where: { id } });
     if (!post) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(post);
   } catch {
@@ -26,6 +27,7 @@ export async function GET(_req: Request, { params }: Params) {
 }
 
 export async function PUT(request: Request, { params }: Params) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   const user = session?.user as { role?: string } | undefined;
   if (!session || user?.role !== "ADMIN") {
@@ -39,7 +41,7 @@ export async function PUT(request: Request, { params }: Params) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
     }
 
-    const post = await prisma.post.update({ where: { id: params.id }, data: parsed.data });
+    const post = await prisma.post.update({ where: { id }, data: parsed.data });
     return NextResponse.json(post);
   } catch {
     return NextResponse.json({ error: "Failed to update post" }, { status: 500 });
@@ -47,6 +49,7 @@ export async function PUT(request: Request, { params }: Params) {
 }
 
 export async function DELETE(_req: Request, { params }: Params) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   const user = session?.user as { role?: string } | undefined;
   if (!session || user?.role !== "ADMIN") {
@@ -54,7 +57,7 @@ export async function DELETE(_req: Request, { params }: Params) {
   }
 
   try {
-    await prisma.post.delete({ where: { id: params.id } });
+    await prisma.post.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to delete post" }, { status: 500 });

@@ -10,12 +10,13 @@ import ReactMarkdown from "react-markdown";
 export const dynamic = "force-dynamic";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   try {
-    const post = await prisma.post.findUnique({ where: { slug: params.slug } });
+    const post = await prisma.post.findUnique({ where: { slug } });
     if (!post) return { title: "Post Not Found" };
     return { title: post.title };
   } catch {
@@ -30,6 +31,7 @@ const typeLabels: Record<string, string> = {
 };
 
 export default async function ResearchPostPage({ params }: Props) {
+  const { slug } = await params;
   let post: {
     id: string;
     title: string;
@@ -39,7 +41,7 @@ export default async function ResearchPostPage({ params }: Props) {
     createdAt: Date;
   } | null = null;
   try {
-    post = await prisma.post.findUnique({ where: { slug: params.slug } });
+    post = await prisma.post.findUnique({ where: { slug } });
   } catch {
     // DB not available
   }

@@ -9,12 +9,13 @@ import { formatDate } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   try {
-    const product = await prisma.product.findUnique({ where: { slug: params.slug } });
+    const product = await prisma.product.findUnique({ where: { slug } });
     if (!product) return { title: "Product Not Found" };
     return { title: product.title, description: product.summary };
   } catch {
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductDetailPage({ params }: Props) {
+  const { slug } = await params;
   let product: {
     id: string;
     title: string;
@@ -33,7 +35,7 @@ export default async function ProductDetailPage({ params }: Props) {
     createdAt: Date;
   } | null = null;
   try {
-    product = await prisma.product.findUnique({ where: { slug: params.slug } });
+    product = await prisma.product.findUnique({ where: { slug } });
   } catch {
     // DB not available
   }

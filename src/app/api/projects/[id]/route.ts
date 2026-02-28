@@ -14,12 +14,13 @@ const updateSchema = z.object({
 });
 
 interface Params {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function GET(_req: Request, { params }: Params) {
+  const { id } = await params;
   try {
-    const project = await prisma.project.findUnique({ where: { id: params.id } });
+    const project = await prisma.project.findUnique({ where: { id } });
     if (!project) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(project);
   } catch {
@@ -28,6 +29,7 @@ export async function GET(_req: Request, { params }: Params) {
 }
 
 export async function PUT(request: Request, { params }: Params) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   const user = session?.user as { role?: string } | undefined;
   if (!session || user?.role !== "ADMIN") {
@@ -42,7 +44,7 @@ export async function PUT(request: Request, { params }: Params) {
     }
 
     const project = await prisma.project.update({
-      where: { id: params.id },
+      where: { id },
       data: parsed.data,
     });
     return NextResponse.json(project);
@@ -52,6 +54,7 @@ export async function PUT(request: Request, { params }: Params) {
 }
 
 export async function DELETE(_req: Request, { params }: Params) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   const user = session?.user as { role?: string } | undefined;
   if (!session || user?.role !== "ADMIN") {
@@ -59,7 +62,7 @@ export async function DELETE(_req: Request, { params }: Params) {
   }
 
   try {
-    await prisma.project.delete({ where: { id: params.id } });
+    await prisma.project.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to delete project" }, { status: 500 });
