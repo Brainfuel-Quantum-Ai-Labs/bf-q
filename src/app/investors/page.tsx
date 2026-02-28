@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, TrendingUp, Shield, Globe, DollarSign } from "lucide-react";
+import { ArrowRight, TrendingUp, Shield, Globe, DollarSign, BarChart3, Lock, Users, Zap } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -7,6 +7,36 @@ export const metadata: Metadata = {
   description:
     "BrainFuel Quantum AI Labs investment thesis, governance framework, and how to engage with our investor relations team.",
 };
+
+const metrics = [
+  { label: "Quantum Computing Market by 2040", value: "$850B", sub: "Projected TAM" },
+  { label: "Enterprise AI Spend by 2027", value: "$407B", sub: "SAM within reach" },
+  { label: "Products in Development", value: "4+", sub: "Across AI, blockchain & security" },
+  { label: "Research Publications", value: "5+", sub: "Peer-reviewed & whitepapers" },
+];
+
+const dueDiligence = [
+  {
+    icon: BarChart3,
+    title: "Financial Transparency",
+    desc: "Quarterly investor updates with unaudited financials, burn rate, and runway projections.",
+  },
+  {
+    icon: Lock,
+    title: "IP Documentation",
+    desc: "Full IP register with patent applications, trade secrets policy, and open-source licensing summary.",
+  },
+  {
+    icon: Users,
+    title: "Team Profiles",
+    desc: "Detailed founder and team CVs, advisor agreements, and equity cap table available under NDA.",
+  },
+  {
+    icon: Zap,
+    title: "Technical Deep Dives",
+    desc: "Architecture walkthroughs, benchmark datasets, and third-party code audits available on request.",
+  },
+];
 
 export default function InvestorsPage() {
   return (
@@ -28,6 +58,35 @@ export default function InvestorsPage() {
               BrainFuel Quantum AI Labs is building infrastructure for the post-classical computing
               era. We invite forward-thinking investors to join us at the frontier.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all"
+              >
+                Request Investor Deck <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/research"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-quantum-700 text-quantum-400 font-semibold hover:bg-quantum-950/50 transition-colors"
+              >
+                Read Our Research
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Key Metrics */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
+            {metrics.map(({ label, value, sub }) => (
+              <div key={label} className="p-6 rounded-xl border border-white/10 bg-card text-center">
+                <div className="text-3xl font-black gradient-text mb-1">{value}</div>
+                <div className="text-xs text-quantum-400 font-medium mb-1">{sub}</div>
+                <div className="text-xs text-muted-foreground leading-snug">{label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -96,6 +155,37 @@ export default function InvestorsPage() {
               aligned with long-term value creation. Our leadership maintains significant equity
               alignment.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Due Diligence */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-3">
+              Due <span className="gradient-text">Diligence</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              We are prepared for serious investor scrutiny. Here is what we provide during the due
+              diligence process.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {dueDiligence.map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="p-6 rounded-xl border border-white/10 bg-card flex items-start gap-4"
+              >
+                <div className="w-10 h-10 rounded-lg bg-quantum-950/60 border border-quantum-800/40 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-5 h-5 text-quantum-400" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">{title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

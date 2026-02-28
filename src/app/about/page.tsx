@@ -1,11 +1,58 @@
 import type { Metadata } from "next";
-import { Target, Eye, Lightbulb, MapPin } from "lucide-react";
+import { Target, Eye, Lightbulb, MapPin, Calendar, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
   description:
     "Learn about BrainFuel Quantum AI Labs — our mission, story, and the founder driving the quantum AI revolution from Navi Mumbai, India.",
 };
+
+const milestones = [
+  {
+    year: "2023",
+    title: "Founded",
+    description:
+      "BrainFuel Quantum AI Labs established in Navi Mumbai as a deep-technology research collective focused on quantum-classical hybrid AI.",
+  },
+  {
+    year: "2023",
+    title: "First Research Publication",
+    description:
+      "Published foundational whitepaper on quantum-classical hybrid architectures, establishing our technical credibility.",
+  },
+  {
+    year: "2024",
+    title: "Seed Funding Secured",
+    description:
+      "Closed seed round to accelerate product development and expand the engineering team.",
+  },
+  {
+    year: "2024",
+    title: "BF-Q Inference API — Beta",
+    description:
+      "Launched public beta of our flagship AI inference platform with sub-10 ms latency.",
+  },
+  {
+    year: "2024",
+    title: "QuantumLedger SDK v1.0",
+    description:
+      "Open-sourced the first post-quantum cryptography SDK for blockchain developers.",
+  },
+  {
+    year: "2025",
+    title: "QuantumMind Neural Engine",
+    description:
+      "Active development of next-gen hybrid neural engine with QPU-accelerated attention mechanisms.",
+  },
+];
+
+const techStack = [
+  { category: "Quantum", items: ["IBM Quantum", "IonQ", "Rigetti", "Qiskit", "PennyLane"] },
+  { category: "AI / ML", items: ["PyTorch", "JAX", "Hugging Face", "NVIDIA CUDA", "ONNX"] },
+  { category: "Blockchain", items: ["Ethereum", "Solana", "Polygon", "CRYSTALS-Kyber", "ZK-SNARKs"] },
+  { category: "Infrastructure", items: ["Kubernetes", "AWS", "GCP", "Terraform", "OpenTelemetry"] },
+];
 
 export default function AboutPage() {
   return (
@@ -81,12 +128,12 @@ export default function AboutPage() {
                   BrainFuel Quantum AI Labs was founded in Navi Mumbai with a singular conviction:
                   the next great leap in computing would not come from incremental improvements to
                   classical silicon — it would emerge from the intersection of quantum mechanics,
-                  machine learning, and decentralized cryptography.
+                  machine learning, and decentralised cryptography.
                 </p>
                 <p>
-                  Our journey began as a research collective, exploring quantum circuit optimization
+                  Our journey began as a research collective, exploring quantum circuit optimisation
                   and hybrid neural architectures. What started as theoretical exploration quickly
-                  evolved into deployable products when we recognized the gap between academic
+                  evolved into deployable products when we recognised the gap between academic
                   quantum research and enterprise-ready tooling.
                 </p>
                 <p>
@@ -114,11 +161,135 @@ export default function AboutPage() {
                 </div>
                 <blockquote className="text-muted-foreground leading-relaxed italic border-l-2 border-quantum-600 pl-4">
                   &quot;We are not just building products — we are building the foundation upon which
-                  the next civilization of intelligent systems will be constructed. The quantum era
+                  the next civilisation of intelligent systems will be constructed. The quantum era
                   is not a distant future; it is the work we do today.&quot;
                 </blockquote>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Milestones */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-3">
+              Our <span className="gradient-text">Milestones</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              A journey from research collective to enterprise-grade quantum AI platform.
+            </p>
+          </div>
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-6 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-quantum-600 to-quantum-900 hidden sm:block" />
+
+            <div className="space-y-8">
+              {milestones.map((m, i) => (
+                <div
+                  key={m.title}
+                  className={`relative grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 ${
+                    i % 2 === 0 ? "" : "sm:direction-rtl"
+                  }`}
+                >
+                  {/* Left / Right positioning */}
+                  {i % 2 === 0 ? (
+                    <>
+                      <div className="sm:text-right sm:pr-12">
+                        <div className="inline-flex items-center gap-2 text-quantum-400 text-sm font-medium mb-2">
+                          <Calendar className="w-3.5 h-3.5 sm:hidden" />
+                          {m.year}
+                        </div>
+                        <h3 className="text-lg font-semibold mb-2">{m.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {m.description}
+                        </p>
+                      </div>
+                      <div className="hidden sm:flex items-start pl-12">
+                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-quantum-400 ring-4 ring-background mt-1" />
+                        <span className="text-quantum-400 font-bold text-sm">{m.year}</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="hidden sm:flex items-start justify-end pr-12">
+                        <span className="text-quantum-400 font-bold text-sm">{m.year}</span>
+                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-quantum-400 ring-4 ring-background mt-1" />
+                      </div>
+                      <div className="sm:pl-12">
+                        <div className="inline-flex items-center gap-2 text-quantum-400 text-sm font-medium mb-2">
+                          <Calendar className="w-3.5 h-3.5 sm:hidden" />
+                          {m.year}
+                        </div>
+                        <h3 className="text-lg font-semibold mb-2">{m.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {m.description}
+                        </p>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Stack */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-3">
+              Our <span className="gradient-text">Technology Stack</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Best-in-class tools and platforms across every domain we operate in.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {techStack.map(({ category, items }) => (
+              <div key={category} className="p-6 rounded-xl border border-white/10 bg-card">
+                <h3 className="text-sm font-semibold text-quantum-400 mb-4">{category}</h3>
+                <ul className="space-y-2">
+                  {items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-quantum-400 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold mb-6">
+            Join Us on the <span className="gradient-text">Journey</span>
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            Whether you want to partner, invest, or just learn more — we would love to connect.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all"
+            >
+              Get in Touch <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link
+              href="/research"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg border border-quantum-700 text-quantum-400 font-semibold hover:bg-quantum-950/50 transition-colors"
+            >
+              Read Our Research
+            </Link>
           </div>
         </div>
       </section>
