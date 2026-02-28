@@ -1,12 +1,23 @@
-import type { Metadata } from "next";
-import { Brain, Cpu, Link2, Shield, FlaskConical, Globe, ArrowRight, CheckCircle2 } from "lucide-react";
-import Link from "next/link";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "BrainFuel Quantum AI Labs offers AI development, quantum computing, blockchain, cybersecurity, and R&D consulting services.",
-};
+import { useState } from "react";
+import {
+  Brain,
+  Cpu,
+  Link2,
+  Shield,
+  FlaskConical,
+  Globe,
+  ArrowRight,
+  CheckCircle2,
+  Sparkles,
+  Zap,
+  Lock,
+  Code2,
+  Atom,
+  Network,
+} from "lucide-react";
+import Link from "next/link";
 
 const services = [
   {
@@ -15,7 +26,10 @@ const services = [
     subtitle: "From prototype to production",
     slug: "artificial-intelligence",
     description:
-      "Custom LLM fine-tuning, computer vision systems, NLP pipelines, recommendation engines, and AI infrastructure. We design, train, and deploy machine learning systems at enterprise scale.",
+      "Custom LLM fine-tuning, computer vision systems, NLP pipelines, recommendation engines, and AI infrastructure at enterprise scale.",
+    longDescription:
+      "Our AI practice covers the full spectrum — from exploratory research through to production-hardened systems serving millions of inference requests per day. We specialise in large language model fine-tuning on domain-specific corpora, multi-modal architectures, reinforcement learning from human feedback (RLHF), and robust MLOps pipelines that make your models reliable 24/7.",
+    technologies: ["PyTorch", "JAX", "TensorFlow", "Hugging Face", "Ray", "Kubeflow", "ONNX", "TensorRT"],
     features: [
       "Custom model training & fine-tuning",
       "MLOps infrastructure & CI/CD",
@@ -23,11 +37,15 @@ const services = [
       "Federated learning systems",
       "AI auditing & explainability",
     ],
+    stats: [{ label: "Models Deployed", value: "120+" }, { label: "Avg Latency", value: "<10ms" }, { label: "Uptime SLA", value: "99.99%" }],
     gradient: "from-purple-900/40 to-purple-800/20",
-    border: "border-purple-800/40 hover:border-purple-600/60",
+    glowColor: "rgba(168,85,247,0.18)",
+    border: "border-purple-800/40 hover:border-purple-500/70",
     iconColor: "text-purple-400",
     iconBg: "bg-purple-950/60",
-    ctaColor: "text-purple-400 hover:text-purple-300",
+    tabBg: "bg-purple-950/40 border-purple-700/50 text-purple-300",
+    tabActive: "bg-purple-600/30 border-purple-500/70 text-purple-200",
+    accentDot: "bg-purple-400",
   },
   {
     icon: Cpu,
@@ -35,7 +53,10 @@ const services = [
     subtitle: "Hybrid quantum-classical solutions",
     slug: "quantum-computing",
     description:
-      "Quantum algorithm design, QPU integration, and hybrid computing architectures. We identify where quantum advantage applies in your specific use case and build the integration layer.",
+      "Quantum algorithm design, QPU integration, and hybrid computing architectures. We identify where quantum advantage applies and build the integration layer.",
+    longDescription:
+      "Quantum computing is transitioning from academic curiosity to commercial reality. Our quantum team designs variational quantum algorithms, noise-adaptive circuits, and hybrid quantum-classical pipelines using IBM Quantum, Google Sycamore, IonQ, and Rigetti platforms. We translate your computational bottlenecks — optimisation, simulation, cryptography — into quantum circuits that outperform classical methods today.",
+    technologies: ["Qiskit", "Cirq", "PennyLane", "Q#", "Braket SDK", "Rigetti Forest", "IonQ API", "CUDA Quantum"],
     features: [
       "Quantum circuit optimisation",
       "Variational Quantum Eigensolver (VQE)",
@@ -43,11 +64,15 @@ const services = [
       "QPU cloud provider integration",
       "Quantum error mitigation",
     ],
-    gradient: "from-quantum-900/40 to-quantum-800/20",
-    border: "border-quantum-800/40 hover:border-quantum-600/60",
-    iconColor: "text-quantum-400",
-    iconBg: "bg-quantum-950/60",
-    ctaColor: "text-quantum-400 hover:text-quantum-300",
+    stats: [{ label: "Algorithms Built", value: "40+" }, { label: "QPU Providers", value: "5" }, { label: "Qubit Range", value: "5–127" }],
+    gradient: "from-sky-900/40 to-sky-800/20",
+    glowColor: "rgba(14,165,233,0.18)",
+    border: "border-sky-800/40 hover:border-sky-500/70",
+    iconColor: "text-sky-400",
+    iconBg: "bg-sky-950/60",
+    tabBg: "bg-sky-950/40 border-sky-700/50 text-sky-300",
+    tabActive: "bg-sky-600/30 border-sky-500/70 text-sky-200",
+    accentDot: "bg-sky-400",
   },
   {
     icon: Link2,
@@ -55,7 +80,10 @@ const services = [
     subtitle: "Decentralised architecture",
     slug: "blockchain-web3",
     description:
-      "Smart contract development, DeFi protocol engineering, NFT infrastructure, DAO tooling, and quantum-resistant cryptographic protocols for the post-quantum blockchain era.",
+      "Smart contract development, DeFi protocol engineering, NFT infrastructure, DAO tooling, and quantum-resistant cryptographic protocols.",
+    longDescription:
+      "We architect and audit the decentralised systems powering next-generation finance, supply chain, identity, and governance. Our team has shipped DeFi protocols with over $50M TVL, built zero-knowledge proof systems for privacy-preserving transactions, and pioneered post-quantum cryptography integrations that future-proof blockchain infrastructure against quantum attacks.",
+    technologies: ["Solidity", "Rust", "Hardhat", "Foundry", "ethers.js", "CRYSTALS-Kyber", "ZK-SNARKs", "Cosmos SDK"],
     features: [
       "Smart contract auditing & development",
       "DeFi protocol engineering",
@@ -63,11 +91,15 @@ const services = [
       "Quantum-resistant cryptography",
       "On-chain AI inference",
     ],
+    stats: [{ label: "Contracts Audited", value: "200+" }, { label: "TVL Secured", value: "$50M+" }, { label: "Chains Supported", value: "12" }],
     gradient: "from-green-900/40 to-green-800/20",
-    border: "border-green-800/40 hover:border-green-600/60",
+    glowColor: "rgba(34,197,94,0.18)",
+    border: "border-green-800/40 hover:border-green-500/70",
     iconColor: "text-green-400",
     iconBg: "bg-green-950/60",
-    ctaColor: "text-green-400 hover:text-green-300",
+    tabBg: "bg-green-950/40 border-green-700/50 text-green-300",
+    tabActive: "bg-green-600/30 border-green-500/70 text-green-200",
+    accentDot: "bg-green-400",
   },
   {
     icon: Shield,
@@ -75,7 +107,10 @@ const services = [
     subtitle: "AI-driven defence systems",
     slug: "cybersecurity",
     description:
-      "Post-quantum PKI, AI threat detection, zero-trust architecture, penetration testing, and security automation. Future-proofing your security posture against quantum-era adversaries.",
+      "Post-quantum PKI, AI threat detection, zero-trust architecture, penetration testing, and security automation.",
+    longDescription:
+      "The convergence of AI and quantum computing creates unprecedented security challenges. Our red team combines classical penetration testing with AI-driven attack simulation, quantum threat modelling, and automated remediation pipelines. We implement NIST post-quantum cryptography standards (CRYSTALS-Dilithium, SPHINCS+, Kyber) and build zero-trust architectures that assume breach from day one.",
+    technologies: ["CRYSTALS-Dilithium", "OpenZiti", "Wazuh", "Falco", "MITRE ATT&CK", "NIST PQC", "Sigma Rules", "eBPF"],
     features: [
       "Post-quantum cryptography migration",
       "AI-driven SIEM & threat hunting",
@@ -83,11 +118,15 @@ const services = [
       "Red team / penetration testing",
       "Security automation & orchestration",
     ],
+    stats: [{ label: "Vulns Found", value: "1,200+" }, { label: "Certs Held", value: "SOC2, ISO27001" }, { label: "Response Time", value: "<1hr" }],
     gradient: "from-red-900/40 to-red-800/20",
-    border: "border-red-800/40 hover:border-red-600/60",
+    glowColor: "rgba(239,68,68,0.18)",
+    border: "border-red-800/40 hover:border-red-500/70",
     iconColor: "text-red-400",
     iconBg: "bg-red-950/60",
-    ctaColor: "text-red-400 hover:text-red-300",
+    tabBg: "bg-red-950/40 border-red-700/50 text-red-300",
+    tabActive: "bg-red-600/30 border-red-500/70 text-red-200",
+    accentDot: "bg-red-400",
   },
   {
     icon: FlaskConical,
@@ -95,7 +134,10 @@ const services = [
     subtitle: "Research to product pipeline",
     slug: "rd-consulting",
     description:
-      "Embedded research partnerships, technology scouting, proof-of-concept development, and translational R&D that bridges academic breakthroughs with production deployments.",
+      "Embedded research partnerships, technology scouting, proof-of-concept development, and translational R&D.",
+    longDescription:
+      "Cutting-edge research often stalls at the lab-to-production boundary. Our R&D consulting practice embeds senior researchers directly into your team to evaluate emerging technologies, design proof-of-concept experiments, and translate academic papers into production systems. We have active collaborations with IIT Bombay, TIFR, and MIT CSAIL, giving you direct access to frontier research.",
+    technologies: ["Python", "Julia", "MATLAB", "LaTeX", "Weights & Biases", "DVC", "MLflow", "ArXiv API"],
     features: [
       "Technology feasibility assessment",
       "PoC development & validation",
@@ -103,11 +145,15 @@ const services = [
       "IP strategy & patent guidance",
       "Grant writing support",
     ],
+    stats: [{ label: "Papers Published", value: "28" }, { label: "Patents Filed", value: "7" }, { label: "Grants Won", value: "₹4.2Cr" }],
     gradient: "from-orange-900/40 to-orange-800/20",
-    border: "border-orange-800/40 hover:border-orange-600/60",
+    glowColor: "rgba(249,115,22,0.18)",
+    border: "border-orange-800/40 hover:border-orange-500/70",
     iconColor: "text-orange-400",
     iconBg: "bg-orange-950/60",
-    ctaColor: "text-orange-400 hover:text-orange-300",
+    tabBg: "bg-orange-950/40 border-orange-700/50 text-orange-300",
+    tabActive: "bg-orange-600/30 border-orange-500/70 text-orange-200",
+    accentDot: "bg-orange-400",
   },
   {
     icon: Globe,
@@ -115,7 +161,10 @@ const services = [
     subtitle: "Full-stack digital products",
     slug: "web-app-development",
     description:
-      "Next.js, React Native, Node.js, and cloud-native platforms. High-performance web applications, mobile apps, and API ecosystems built for global scale and AI integration.",
+      "Next.js, React Native, Node.js, and cloud-native platforms. High-performance web apps and API ecosystems built for global scale.",
+    longDescription:
+      "We build the digital interfaces through which your users experience AI and quantum-powered systems. Our full-stack teams ship production-ready Next.js applications, React Native mobile apps, real-time data dashboards, and cloud-native API backends on AWS, GCP, and Azure. Every product is built with accessibility, Core Web Vitals, and AI-integration readiness at the centre.",
+    technologies: ["Next.js 14", "React Native", "TypeScript", "Node.js", "PostgreSQL", "Redis", "Kubernetes", "Terraform"],
     features: [
       "Next.js / React / TypeScript",
       "React Native mobile apps",
@@ -123,47 +172,42 @@ const services = [
       "Cloud-native architecture",
       "Performance optimisation",
     ],
+    stats: [{ label: "Apps Shipped", value: "85+" }, { label: "Avg Lighthouse", value: "98/100" }, { label: "Uptime", value: "99.97%" }],
     gradient: "from-blue-900/40 to-blue-800/20",
-    border: "border-blue-800/40 hover:border-blue-600/60",
+    glowColor: "rgba(59,130,246,0.18)",
+    border: "border-blue-800/40 hover:border-blue-500/70",
     iconColor: "text-blue-400",
     iconBg: "bg-blue-950/60",
-    ctaColor: "text-blue-400 hover:text-blue-300",
+    tabBg: "bg-blue-950/40 border-blue-700/50 text-blue-300",
+    tabActive: "bg-blue-600/30 border-blue-500/70 text-blue-200",
+    accentDot: "bg-blue-400",
   },
 ];
 
 const process = [
-  {
-    step: "01",
-    title: "Discovery Call",
-    desc: "30-minute session to understand your use case, constraints, and goals.",
-  },
-  {
-    step: "02",
-    title: "Technical Assessment",
-    desc: "Our engineers analyse feasibility, define scope, and produce a delivery roadmap.",
-  },
-  {
-    step: "03",
-    title: "Proposal & SOW",
-    desc: "Fixed-price or time-and-materials statement of work with clear milestones.",
-  },
-  {
-    step: "04",
-    title: "Delivery & Handover",
-    desc: "Agile sprints, weekly demos, full documentation, and knowledge transfer.",
-  },
+  { step: "01", title: "Discovery Call", icon: Sparkles, desc: "30-minute session to understand your use case, constraints, and goals." },
+  { step: "02", title: "Technical Assessment", icon: Atom, desc: "Our engineers analyse feasibility, define scope, and produce a delivery roadmap." },
+  { step: "03", title: "Proposal & SOW", icon: Network, desc: "Fixed-price or time-and-materials statement of work with clear milestones." },
+  { step: "04", title: "Delivery & Handover", icon: Zap, desc: "Agile sprints, weekly demos, full documentation, and knowledge transfer." },
 ];
 
 export default function ServicesPage() {
+  const [activeTab, setActiveTab] = useState(0);
+  const service = services[activeTab];
+
   return (
     <div className="pt-16">
-      {/* Hero */}
       <section className="py-24 relative overflow-hidden">
+        {/* Background ambient glows */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-quantum-600/8 blur-[120px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-quantum-600/6 blur-[140px]" />
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-purple-900/8 blur-[120px]" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-sky-900/8 blur-[120px]" />
         </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-20">
+          {/* Header */}
+          <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-quantum-400 animate-pulse" />
               End-to-End Technology Services
@@ -177,50 +221,123 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          {/* Service cards (clickable) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
-            {services.map((service) => (
-              <Link
-                key={service.title}
-                href={`/contact?service=${service.slug}`}
-                className="group block"
+          {/* Tab navigation */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {services.map((s, i) => (
+              <button
+                key={s.slug}
+                onClick={() => setActiveTab(i)}
+                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all duration-200 ${
+                  activeTab === i
+                    ? `${s.tabActive} scale-105 shadow-lg`
+                    : `${s.tabBg} hover:scale-105`
+                }`}
               >
-                <div
-                  className={`p-8 rounded-2xl border ${service.border} bg-gradient-to-br ${service.gradient} transition-all duration-200 group-hover:scale-[1.01] h-full`}
-                >
-                  <div className="flex items-start gap-4 mb-6">
-                    <div
-                      className={`w-12 h-12 rounded-xl ${service.iconBg} flex items-center justify-center flex-shrink-0`}
-                    >
-                      <service.icon className={`w-6 h-6 ${service.iconColor}`} />
+                <s.icon className={`w-4 h-4 ${s.iconColor}`} />
+                <span className="hidden sm:inline">{s.title}</span>
+                <span className="sm:hidden">{s.title.split(" ")[0]}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Active service detail panel */}
+          <div
+            className={`rounded-3xl border ${service.border} bg-gradient-to-br ${service.gradient} mb-16 overflow-hidden transition-all duration-300`}
+            style={{ boxShadow: `0 0 80px ${service.glowColor}` }}
+          >
+            <div className="p-8 md:p-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                {/* Left */}
+                <div>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`w-14 h-14 rounded-2xl ${service.iconBg} flex items-center justify-center border ${service.border}`}>
+                      <service.icon className={`w-7 h-7 ${service.iconColor}`} />
                     </div>
-                    <div className="flex-grow min-w-0">
-                      <h2 className="text-xl font-bold">{service.title}</h2>
+                    <div>
+                      <h2 className="text-2xl font-bold">{service.title}</h2>
                       <p className={`text-sm ${service.iconColor}`}>{service.subtitle}</p>
                     </div>
-                    <ArrowRight
-                      className="w-5 h-5 flex-shrink-0 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all"
-                    />
                   </div>
-                  <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className={`w-3.5 h-3.5 flex-shrink-0 ${service.iconColor}`} />
-                        {f}
-                      </li>
+
+                  <p className="text-muted-foreground leading-relaxed mb-6">{service.longDescription}</p>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-3 mb-6">
+                    {service.stats.map((stat) => (
+                      <div key={stat.label} className="p-3 rounded-xl bg-black/20 border border-white/10 text-center">
+                        <div className={`text-base font-bold ${service.iconColor}`}>{stat.value}</div>
+                        <div className="text-xs text-muted-foreground mt-0.5">{stat.label}</div>
+                      </div>
                     ))}
-                  </ul>
-                  <span
-                    className={`inline-flex items-center gap-1 text-sm font-medium ${service.ctaColor}`}
+                  </div>
+
+                  <Link
+                    href={`/contact?service=${service.slug}`}
+                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl border ${service.border} bg-black/20 hover:bg-black/30 transition-all text-sm font-semibold ${service.iconColor}`}
                   >
-                    Enquire about this service <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
+                    Enquire about this service <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
-              </Link>
-            ))}
+
+                {/* Right */}
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+                      What&apos;s Included
+                    </h3>
+                    <ul className="space-y-2.5">
+                      {service.features.map((f) => (
+                        <li key={f} className="flex items-center gap-3 text-sm">
+                          <CheckCircle2 className={`w-4 h-4 flex-shrink-0 ${service.iconColor}`} />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+                      Technologies &amp; Frameworks
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {service.technologies.map((tech) => (
+                        <span key={tech} className={`px-3 py-1 text-xs rounded-lg border font-mono font-medium ${service.tabBg}`}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* All services compact grid */}
+          <div className="mb-20">
+            <h2 className="text-2xl font-bold text-center mb-8">
+              All <span className="gradient-text">Capabilities</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {services.map((s, i) => (
+                <button
+                  key={s.slug}
+                  onClick={() => setActiveTab(i)}
+                  className={`group text-left p-5 rounded-2xl border transition-all duration-200 bg-gradient-to-br ${s.gradient} ${s.border} ${activeTab === i ? "scale-[1.02]" : "hover:scale-[1.01]"}`}
+                  style={activeTab === i ? { boxShadow: `0 0 40px ${s.glowColor}` } : undefined}
+                >
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className={`w-9 h-9 rounded-xl ${s.iconBg} flex items-center justify-center flex-shrink-0`}>
+                      <s.icon className={`w-4 h-4 ${s.iconColor}`} />
+                    </div>
+                    <div className="flex-grow min-w-0">
+                      <h3 className="font-semibold text-sm">{s.title}</h3>
+                      <p className={`text-xs ${s.iconColor}`}>{s.subtitle}</p>
+                    </div>
+                    {activeTab === i && <div className={`w-2 h-2 rounded-full ${s.accentDot} animate-pulse flex-shrink-0 mt-1`} />}
+                  </div>
+                  <p className="text-xs text-muted-foreground line-clamp-2">{s.description}</p>
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* How we work */}
@@ -234,12 +351,12 @@ export default function ServicesPage() {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {process.map(({ step, title, desc }) => (
-                <div
-                  key={step}
-                  className="p-6 rounded-xl border border-white/10 bg-card text-center"
-                >
-                  <div className="text-4xl font-black gradient-text mb-4">{step}</div>
+              {process.map(({ step, title, desc, icon: Icon }) => (
+                <div key={step} className="p-6 rounded-2xl border border-white/10 bg-card text-center hover:border-quantum-700/50 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-quantum-950/60 border border-quantum-800/40 flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-5 h-5 text-quantum-400" />
+                  </div>
+                  <div className="text-3xl font-black gradient-text mb-3">{step}</div>
                   <h3 className="font-semibold mb-2">{title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
                 </div>
@@ -248,19 +365,36 @@ export default function ServicesPage() {
           </div>
 
           {/* CTA */}
-          <div className="text-center p-12 rounded-2xl border border-quantum-800/30 bg-quantum-950/20">
-            <h2 className="text-2xl font-bold mb-3">
-              Ready to <span className="gradient-text">Get Started</span>?
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-              Ready to explore how we can help your organisation? Schedule a free discovery call.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all"
-            >
-              Start a Conversation <ArrowRight className="w-5 h-5" />
-            </Link>
+          <div className="text-center p-12 rounded-3xl border border-quantum-800/30 bg-quantum-950/20 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-quantum-600/10 blur-[60px]" />
+            </div>
+            <div className="relative">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-xs mb-6">
+                <Lock className="w-3 h-3" /> Enterprise-grade security &amp; NDAs available
+              </div>
+              <h2 className="text-3xl font-bold mb-3">
+                Ready to <span className="gradient-text">Get Started</span>?
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+                Schedule a free 30-minute discovery call. No commitment required. We&apos;ll assess
+                your use case and tell you exactly where we can help.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg shadow-quantum-900/30"
+                >
+                  Start a Conversation <ArrowRight className="w-5 h-5" />
+                </Link>
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-sm font-semibold transition-all"
+                >
+                  <Code2 className="w-4 h-4 text-muted-foreground" /> View Our Work
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
