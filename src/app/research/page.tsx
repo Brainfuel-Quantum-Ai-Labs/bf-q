@@ -50,7 +50,7 @@ export default function ResearchPage() {
     fetch("/api/posts")
       .then((r) => r.ok ? r.json() : null)
       .then((data) => { if (Array.isArray(data) && data.length > 0) setPosts(data); })
-      .catch(() => {});
+      .catch((err) => { console.warn("Failed to fetch posts:", err); });
   }, []);
 
   const counts = {

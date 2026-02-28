@@ -71,7 +71,7 @@ export default function ProductsPage() {
           );
         }
       })
-      .catch(() => {});
+      .catch((err) => { console.warn("Failed to fetch products:", err); });
   }, []);
 
   const categories = [...new Set(products.map((p) => p.category))];
@@ -162,11 +162,10 @@ export default function ProductsPage() {
                     return (
                       <Link key={product.id} href={`/products/${product.slug}`} className="group block">
                         <div
-                          className={`rounded-2xl border overflow-hidden h-full transition-all duration-300 group-hover:scale-[1.01] ${
+                          className={`rounded-2xl border overflow-hidden h-full transition-all duration-300 group-hover:scale-[1.01] card-hover-glow ${
                             categoryBorders[cat] ?? "border-white/10"
                           } bg-card`}
-                          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = `0 0 50px ${glow}`; }}
-                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+                          style={{ "--glow-color": glow } as React.CSSProperties}
                         >
                           {/* Card header gradient */}
                           <div className={`h-32 bg-gradient-to-br ${categoryGradients[cat] ?? "from-quantum-800 to-quantum-600"} relative`}>

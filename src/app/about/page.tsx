@@ -138,9 +138,8 @@ export default function AboutPage() {
               ].map(({ icon: Icon, title, text, color, bg, glow }) => (
                 <div
                   key={title}
-                  className={`p-8 rounded-2xl border ${bg} hover:scale-[1.01] transition-all duration-300`}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = `0 0 40px ${glow}`; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+                  className={`p-8 rounded-2xl border ${bg} hover:scale-[1.01] transition-all duration-300 card-hover-glow`}
+                  style={{ "--glow-color": glow } as React.CSSProperties}
                 >
                   <Icon className={`w-8 h-8 ${color} mb-4`} />
                   <h2 className="text-xl font-semibold mb-3">{title}</h2>
@@ -222,22 +221,26 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-quantum-500 via-quantum-700 to-quantum-900" />
                 <div className="space-y-8">
-                  {milestones.map((m, i) => (
+                  {milestones.map((m, i) => {
+                    const isLatest = i === milestones.length - 1;
+                    const dotClass = isLatest
+                      ? "bg-quantum-400 border-quantum-400 animate-pulse"
+                      : "bg-background border-quantum-600";
+                    return (
                     <div key={m.title} className="relative flex gap-8 items-start">
                       <div className="relative z-10 flex-shrink-0 w-16 flex flex-col items-center">
-                        <div className={`w-4 h-4 rounded-full border-2 ${i === milestones.length - 1 ? "bg-quantum-400 border-quantum-400 animate-pulse" : "bg-background border-quantum-600"}`} />
+                        <div className={`w-4 h-4 rounded-full border-2 ${dotClass}`} />
                         <span className="text-xs text-quantum-400 font-bold mt-2">{m.year}</span>
                       </div>
                       <div
-                        className="flex-grow p-5 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/50 transition-all duration-200 hover:scale-[1.005]"
-                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 30px rgba(14,165,233,0.08)"; }}
-                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+                        className="flex-grow p-5 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/50 transition-all duration-200 hover:scale-[1.005] card-hover-glow"
                       >
                         <h3 className="font-semibold mb-1.5">{m.title}</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">{m.description}</p>
                       </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -253,9 +256,7 @@ export default function AboutPage() {
                 {techStack.map(({ category, items }) => (
                   <div
                     key={category}
-                    className="p-6 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/40 transition-all duration-200"
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 40px rgba(14,165,233,0.08)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+                    className="p-6 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/40 transition-all duration-200 card-hover-glow"
                   >
                     <h3 className="text-sm font-semibold uppercase tracking-widest text-quantum-400 mb-4">{category}</h3>
                     <div className="flex flex-wrap gap-2">
@@ -281,9 +282,7 @@ export default function AboutPage() {
                 {values.map((v, i) => (
                   <div
                     key={v.title}
-                    className="p-6 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/40 transition-all duration-200 hover:scale-[1.01]"
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 40px rgba(14,165,233,0.08)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+                    className="p-6 rounded-2xl border border-white/10 bg-card hover:border-quantum-700/40 transition-all duration-200 hover:scale-[1.01] card-hover-glow"
                   >
                     <div className="text-3xl font-black gradient-text mb-3">{String(i + 1).padStart(2, "0")}</div>
                     <h3 className="font-semibold mb-2">{v.title}</h3>

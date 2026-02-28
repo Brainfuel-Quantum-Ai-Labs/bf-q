@@ -60,7 +60,7 @@ export default function ProjectsPage() {
     fetch("/api/projects")
       .then((r) => r.ok ? r.json() : null)
       .then((data) => { if (Array.isArray(data) && data.length > 0) setProjects(data); })
-      .catch(() => {});
+      .catch((err) => { console.warn("Failed to fetch projects:", err); });
   }, []);
 
   const counts = {
@@ -168,9 +168,6 @@ export default function ProjectsPage() {
                     <div
                       key={project.id}
                       className={`p-6 rounded-2xl border transition-all duration-300 ${cfg.border} ${cfg.bg} hover:scale-[1.01]`}
-                      style={{ boxShadow: `0 0 0 0 ${cfg.glowColor}` }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = `0 0 40px ${cfg.glowColor}`; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
                     >
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div className="flex-grow min-w-0">
