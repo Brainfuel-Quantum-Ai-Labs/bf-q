@@ -11,35 +11,35 @@ const statusConfig = {
   NOW: {
     label: "Active Now",
     variant: "success" as const,
-    dot: "bg-green-400",
-    border: "border-green-800/40 hover:border-green-600/60",
-    bg: "bg-green-950/10",
-    tagColor: "bg-green-950/30 border-green-900/50 text-green-400",
-    glowColor: "rgba(34,197,94,0.12)",
-    tabActive: "bg-green-900/50 border-green-600/60 text-green-300",
-    tabIdle: "bg-green-950/20 border-green-900/40 text-green-500 hover:border-green-700/60",
+    dot: "bg-green-500",
+    border: "border-green-200 hover:border-green-400",
+    bg: "bg-green-50",
+    tagColor: "bg-green-50 border-green-200 text-green-700",
+    glowColor: "rgba(34,197,94,0.08)",
+    tabActive: "bg-green-100 border-green-400 text-green-700",
+    tabIdle: "bg-white border-gray-200 text-gray-600 hover:border-green-300",
   },
   NEXT: {
     label: "Coming Next",
     variant: "warning" as const,
-    dot: "bg-yellow-400",
-    border: "border-yellow-800/40 hover:border-yellow-600/60",
-    bg: "bg-yellow-950/10",
-    tagColor: "bg-yellow-950/30 border-yellow-900/50 text-yellow-400",
-    glowColor: "rgba(234,179,8,0.12)",
-    tabActive: "bg-yellow-900/50 border-yellow-600/60 text-yellow-300",
-    tabIdle: "bg-yellow-950/20 border-yellow-900/40 text-yellow-500 hover:border-yellow-700/60",
+    dot: "bg-yellow-500",
+    border: "border-yellow-200 hover:border-yellow-400",
+    bg: "bg-yellow-50",
+    tagColor: "bg-yellow-50 border-yellow-200 text-yellow-700",
+    glowColor: "rgba(234,179,8,0.08)",
+    tabActive: "bg-yellow-100 border-yellow-400 text-yellow-700",
+    tabIdle: "bg-white border-gray-200 text-gray-600 hover:border-yellow-300",
   },
   PIPELINE: {
     label: "In Pipeline",
     variant: "quantum" as const,
-    dot: "bg-quantum-400",
-    border: "border-quantum-800/40 hover:border-quantum-600/60",
-    bg: "bg-quantum-950/10",
-    tagColor: "bg-quantum-950/30 border-quantum-800/50 text-quantum-400",
-    glowColor: "rgba(14,165,233,0.12)",
-    tabActive: "bg-quantum-900/50 border-quantum-600/60 text-quantum-300",
-    tabIdle: "bg-quantum-950/20 border-quantum-900/40 text-quantum-500 hover:border-quantum-700/60",
+    dot: "bg-quantum-500",
+    border: "border-quantum-200 hover:border-quantum-400",
+    bg: "bg-quantum-50",
+    tagColor: "bg-quantum-50 border-quantum-200 text-quantum-600",
+    glowColor: "rgba(14,165,233,0.08)",
+    tabActive: "bg-quantum-100 border-quantum-400 text-quantum-700",
+    tabIdle: "bg-white border-gray-200 text-gray-600 hover:border-quantum-300",
   },
 };
 
@@ -82,15 +82,13 @@ export default function ProjectsPage() {
     <div className="pt-16">
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-quantum-600/6 blur-[140px]" />
-          <div className="absolute top-0 left-0 w-[350px] h-[350px] rounded-full bg-green-900/8 blur-[100px]" />
-          <div className="absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-yellow-900/6 blur-[100px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               Live Roadmap
             </div>
@@ -109,14 +107,14 @@ export default function ProjectsPage() {
               const Icon = tabIcons[key];
               const isActive = filter === key;
               const dotColor =
-                key === "ALL" ? "bg-quantum-400" :
-                key === "NOW" ? "bg-green-400" :
-                key === "NEXT" ? "bg-yellow-400" : "bg-quantum-400";
+                key === "ALL" ? "bg-quantum-500" :
+                key === "NOW" ? "bg-green-500" :
+                key === "NEXT" ? "bg-yellow-500" : "bg-quantum-500";
               const activeClass =
-                key === "ALL" ? "bg-quantum-900/50 border-quantum-600/60 text-quantum-300 scale-105" :
+                key === "ALL" ? "bg-quantum-100 border-quantum-400 text-quantum-700 scale-105" :
                 statusConfig[key as "NOW"|"NEXT"|"PIPELINE"]?.tabActive + " scale-105";
               const idleClass =
-                key === "ALL" ? "bg-quantum-950/20 border-quantum-900/40 text-quantum-500 hover:border-quantum-700/60" :
+                key === "ALL" ? "bg-white border-gray-200 text-gray-600 hover:border-quantum-300" :
                 statusConfig[key as "NOW"|"NEXT"|"PIPELINE"]?.tabIdle;
               return (
                 <button
@@ -126,7 +124,7 @@ export default function ProjectsPage() {
                 >
                   <Icon className="w-4 h-4" />
                   {key === "ALL" ? "All Projects" : statusConfig[key as "NOW"|"NEXT"|"PIPELINE"].label}
-                  <span className={`px-1.5 py-0.5 rounded-md text-xs font-bold ${isActive ? "bg-white/20" : "bg-white/10"}`}>
+                  <span className={`px-1.5 py-0.5 rounded-md text-xs font-bold ${isActive ? "bg-white/50" : "bg-gray-100"}`}>
                     {counts[key]}
                   </span>
                 </button>
@@ -141,7 +139,7 @@ export default function ProjectsPage() {
               { label: "Coming Next", value: counts.NEXT, dot: "bg-yellow-400" },
               { label: "In Pipeline", value: counts.PIPELINE, dot: "bg-quantum-400" },
             ].map(({ label, value, dot }) => (
-              <div key={label} className="text-center p-4 rounded-xl border border-white/10 bg-card">
+              <div key={label} className="text-center p-4 rounded-xl border border-gray-200 bg-white shadow-sm">
                 <div className="flex items-center justify-center gap-1.5 mb-1">
                   <div className={`w-2 h-2 rounded-full ${dot}`} />
                   <span className="text-xs text-muted-foreground">{label}</span>
@@ -158,10 +156,10 @@ export default function ProjectsPage() {
             if (group.length === 0) return null;
             return (
               <div key={status} className="mb-16">
-                <div className="flex items-center gap-3 mb-8 pb-3 border-b border-white/10">
+                <div className="flex items-center gap-3 mb-8 pb-3 border-b border-gray-200">
                   <div className={`w-3 h-3 rounded-full ${cfg.dot}`} />
                   <h2 className="text-xl font-semibold">{cfg.label}</h2>
-                  <span className="px-2 py-0.5 text-xs rounded-full bg-white/10 text-muted-foreground">{group.length}</span>
+                  <span className="px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-600">{group.length}</span>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {group.map((project) => (
@@ -189,9 +187,9 @@ export default function ProjectsPage() {
                       <Link
                         href="/contact"
                         className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
-                          status === "NOW" ? "text-green-400 hover:text-green-300" :
-                          status === "NEXT" ? "text-yellow-400 hover:text-yellow-300" :
-                          "text-quantum-400 hover:text-quantum-300"
+                          status === "NOW" ? "text-green-600 hover:text-green-700" :
+                          status === "NEXT" ? "text-yellow-600 hover:text-yellow-700" :
+                          "text-quantum-600 hover:text-quantum-700"
                         }`}
                       >
                         {status === "NOW" ? "Get early access" : status === "NEXT" ? "Join waitlist" : "Learn more"}
@@ -209,10 +207,7 @@ export default function ProjectsPage() {
           )}
 
           {/* CTA */}
-          <div className="text-center p-12 rounded-2xl border border-white/10 bg-card relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-quantum-600/8 blur-[60px]" />
-            </div>
+          <div className="text-center p-12 rounded-2xl border border-gray-200 bg-gray-50 relative overflow-hidden">
             <div className="relative">
               <h2 className="text-2xl font-bold mb-3">
                 Interested in <span className="gradient-text">Collaborating</span>?
@@ -223,7 +218,7 @@ export default function ProjectsPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg shadow-quantum-900/30"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg"
               >
                 Start a Conversation <ArrowRight className="w-5 h-5" />
               </Link>

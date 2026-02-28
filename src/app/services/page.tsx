@@ -38,14 +38,14 @@ const services = [
       "AI auditing & explainability",
     ],
     stats: [{ label: "Models Deployed", value: "120+" }, { label: "Avg Latency", value: "<10ms" }, { label: "Uptime SLA", value: "99.99%" }],
-    gradient: "from-purple-900/40 to-purple-800/20",
-    glowColor: "rgba(168,85,247,0.18)",
-    border: "border-purple-800/40 hover:border-purple-500/70",
-    iconColor: "text-purple-400",
-    iconBg: "bg-purple-950/60",
-    tabBg: "bg-purple-950/40 border-purple-700/50 text-purple-300",
-    tabActive: "bg-purple-600/30 border-purple-500/70 text-purple-200",
-    accentDot: "bg-purple-400",
+    gradient: "from-purple-50 to-white",
+    glowColor: "rgba(168,85,247,0.10)",
+    border: "border-purple-200 hover:border-purple-400",
+    iconColor: "text-purple-600",
+    iconBg: "bg-purple-100",
+    tabBg: "bg-purple-100 border-purple-400 text-purple-700",
+    tabActive: "bg-purple-200 border-purple-500 text-purple-800",
+    accentDot: "bg-purple-500",
   },
   {
     icon: Cpu,
@@ -65,14 +65,14 @@ const services = [
       "Quantum error mitigation",
     ],
     stats: [{ label: "Algorithms Built", value: "40+" }, { label: "QPU Providers", value: "5" }, { label: "Qubit Range", value: "5–127" }],
-    gradient: "from-sky-900/40 to-sky-800/20",
-    glowColor: "rgba(14,165,233,0.18)",
-    border: "border-sky-800/40 hover:border-sky-500/70",
-    iconColor: "text-sky-400",
-    iconBg: "bg-sky-950/60",
-    tabBg: "bg-sky-950/40 border-sky-700/50 text-sky-300",
-    tabActive: "bg-sky-600/30 border-sky-500/70 text-sky-200",
-    accentDot: "bg-sky-400",
+    gradient: "from-sky-50 to-white",
+    glowColor: "rgba(14,165,233,0.10)",
+    border: "border-sky-200 hover:border-sky-400",
+    iconColor: "text-sky-600",
+    iconBg: "bg-sky-100",
+    tabBg: "bg-sky-100 border-sky-400 text-sky-700",
+    tabActive: "bg-sky-200 border-sky-500 text-sky-800",
+    accentDot: "bg-sky-500",
   },
   {
     icon: Link2,
@@ -92,14 +92,14 @@ const services = [
       "On-chain AI inference",
     ],
     stats: [{ label: "Contracts Audited", value: "200+" }, { label: "TVL Secured", value: "$50M+" }, { label: "Chains Supported", value: "12" }],
-    gradient: "from-green-900/40 to-green-800/20",
-    glowColor: "rgba(34,197,94,0.18)",
-    border: "border-green-800/40 hover:border-green-500/70",
-    iconColor: "text-green-400",
-    iconBg: "bg-green-950/60",
-    tabBg: "bg-green-950/40 border-green-700/50 text-green-300",
-    tabActive: "bg-green-600/30 border-green-500/70 text-green-200",
-    accentDot: "bg-green-400",
+    gradient: "from-green-50 to-white",
+    glowColor: "rgba(34,197,94,0.10)",
+    border: "border-green-200 hover:border-green-400",
+    iconColor: "text-green-600",
+    iconBg: "bg-green-100",
+    tabBg: "bg-green-100 border-green-400 text-green-700",
+    tabActive: "bg-green-200 border-green-500 text-green-800",
+    accentDot: "bg-green-500",
   },
   {
     icon: Shield,
@@ -119,14 +119,14 @@ const services = [
       "Security automation & orchestration",
     ],
     stats: [{ label: "Vulns Found", value: "1,200+" }, { label: "Certs Held", value: "SOC2, ISO27001" }, { label: "Response Time", value: "<1hr" }],
-    gradient: "from-red-900/40 to-red-800/20",
-    glowColor: "rgba(239,68,68,0.18)",
-    border: "border-red-800/40 hover:border-red-500/70",
-    iconColor: "text-red-400",
-    iconBg: "bg-red-950/60",
-    tabBg: "bg-red-950/40 border-red-700/50 text-red-300",
-    tabActive: "bg-red-600/30 border-red-500/70 text-red-200",
-    accentDot: "bg-red-400",
+    gradient: "from-red-50 to-white",
+    glowColor: "rgba(239,68,68,0.10)",
+    border: "border-red-200 hover:border-red-400",
+    iconColor: "text-red-600",
+    iconBg: "bg-red-100",
+    tabBg: "bg-red-100 border-red-400 text-red-700",
+    tabActive: "bg-red-200 border-red-500 text-red-800",
+    accentDot: "bg-red-500",
   },
   {
     icon: FlaskConical,
@@ -146,14 +146,14 @@ const services = [
       "Grant writing support",
     ],
     stats: [{ label: "Papers Published", value: "28" }, { label: "Patents Filed", value: "7" }, { label: "Grants Won", value: "₹4.2Cr" }],
-    gradient: "from-orange-900/40 to-orange-800/20",
-    glowColor: "rgba(249,115,22,0.18)",
-    border: "border-orange-800/40 hover:border-orange-500/70",
-    iconColor: "text-orange-400",
-    iconBg: "bg-orange-950/60",
-    tabBg: "bg-orange-950/40 border-orange-700/50 text-orange-300",
-    tabActive: "bg-orange-600/30 border-orange-500/70 text-orange-200",
-    accentDot: "bg-orange-400",
+    gradient: "from-orange-50 to-white",
+    glowColor: "rgba(249,115,22,0.10)",
+    border: "border-orange-200 hover:border-orange-400",
+    iconColor: "text-orange-600",
+    iconBg: "bg-orange-100",
+    tabBg: "bg-orange-100 border-orange-400 text-orange-700",
+    tabActive: "bg-orange-200 border-orange-500 text-orange-800",
+    accentDot: "bg-orange-500",
   },
   {
     icon: Globe,
@@ -173,14 +173,14 @@ const services = [
       "Performance optimisation",
     ],
     stats: [{ label: "Apps Shipped", value: "85+" }, { label: "Avg Lighthouse", value: "98/100" }, { label: "Uptime", value: "99.97%" }],
-    gradient: "from-blue-900/40 to-blue-800/20",
-    glowColor: "rgba(59,130,246,0.18)",
-    border: "border-blue-800/40 hover:border-blue-500/70",
-    iconColor: "text-blue-400",
-    iconBg: "bg-blue-950/60",
-    tabBg: "bg-blue-950/40 border-blue-700/50 text-blue-300",
-    tabActive: "bg-blue-600/30 border-blue-500/70 text-blue-200",
-    accentDot: "bg-blue-400",
+    gradient: "from-blue-50 to-white",
+    glowColor: "rgba(59,130,246,0.10)",
+    border: "border-blue-200 hover:border-blue-400",
+    iconColor: "text-blue-600",
+    iconBg: "bg-blue-100",
+    tabBg: "bg-blue-100 border-blue-400 text-blue-700",
+    tabActive: "bg-blue-200 border-blue-500 text-blue-800",
+    accentDot: "bg-blue-500",
   },
 ];
 
@@ -198,17 +198,14 @@ export default function ServicesPage() {
   return (
     <div className="pt-16">
       <section className="py-24 relative overflow-hidden">
-        {/* Background ambient glows */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-quantum-600/6 blur-[140px]" />
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-purple-900/8 blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-sky-900/8 blur-[120px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-quantum-400 animate-pulse" />
               End-to-End Technology Services
             </div>
@@ -264,7 +261,7 @@ export default function ServicesPage() {
                   {/* Stats */}
                   <div className="grid grid-cols-3 gap-3 mb-6">
                     {service.stats.map((stat) => (
-                      <div key={stat.label} className="p-3 rounded-xl bg-black/20 border border-white/10 text-center">
+                      <div key={stat.label} className="p-3 rounded-xl bg-white border border-gray-200 text-center">
                         <div className={`text-base font-bold ${service.iconColor}`}>{stat.value}</div>
                         <div className="text-xs text-muted-foreground mt-0.5">{stat.label}</div>
                       </div>
@@ -273,7 +270,7 @@ export default function ServicesPage() {
 
                   <Link
                     href={`/contact?service=${service.slug}`}
-                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl border ${service.border} bg-black/20 hover:bg-black/30 transition-all text-sm font-semibold ${service.iconColor}`}
+                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl border ${service.border} bg-white hover:bg-gray-50 transition-all text-sm font-semibold ${service.iconColor}`}
                   >
                     Enquire about this service <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -352,9 +349,9 @@ export default function ServicesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {process.map(({ step, title, desc, icon: Icon }) => (
-                <div key={step} className="p-6 rounded-2xl border border-white/10 bg-card text-center hover:border-quantum-700/50 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-quantum-950/60 border border-quantum-800/40 flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-5 h-5 text-quantum-400" />
+                <div key={step} className="p-6 rounded-2xl border border-gray-200 bg-white shadow-sm text-center hover:border-quantum-300 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-quantum-50 border border-quantum-200 flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-5 h-5 text-quantum-600" />
                   </div>
                   <div className="text-3xl font-black gradient-text mb-3">{step}</div>
                   <h3 className="font-semibold mb-2">{title}</h3>
@@ -365,12 +362,9 @@ export default function ServicesPage() {
           </div>
 
           {/* CTA */}
-          <div className="text-center p-12 rounded-3xl border border-quantum-800/30 bg-quantum-950/20 relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-quantum-600/10 blur-[60px]" />
-            </div>
+          <div className="text-center p-12 rounded-3xl border border-gray-200 bg-gray-50 relative overflow-hidden">
             <div className="relative">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-xs mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-xs mb-6">
                 <Lock className="w-3 h-3" /> Enterprise-grade security &amp; NDAs available
               </div>
               <h2 className="text-3xl font-bold mb-3">
@@ -383,13 +377,13 @@ export default function ServicesPage() {
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg shadow-quantum-900/30"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg"
                 >
                   Start a Conversation <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link
                   href="/projects"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-sm font-semibold transition-all"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50 text-sm font-semibold transition-all"
                 >
                   <Code2 className="w-4 h-4 text-muted-foreground" /> View Our Work
                 </Link>

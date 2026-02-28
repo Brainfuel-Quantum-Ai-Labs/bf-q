@@ -10,8 +10,8 @@ const pillars = [
     description:
       "Custom LLMs, computer vision, NLP, and ML infrastructure designed for enterprise-scale deployment with unmatched performance.",
     color: "from-purple-600 to-purple-400",
-    border: "border-purple-800/40",
-    bg: "bg-purple-950/20",
+    border: "border-purple-200",
+    bg: "bg-purple-50",
   },
   {
     icon: Cpu,
@@ -19,8 +19,8 @@ const pillars = [
     description:
       "Quantum-classical hybrid algorithms and QPU integrations that unlock computational advantages across optimization and simulation.",
     color: "from-quantum-600 to-quantum-400",
-    border: "border-quantum-800/40",
-    bg: "bg-quantum-950/20",
+    border: "border-quantum-200",
+    bg: "bg-quantum-50",
   },
   {
     icon: Link2,
@@ -28,8 +28,8 @@ const pillars = [
     description:
       "Decentralized protocols, smart contracts, and quantum-resistant cryptography for the next generation of trustless systems.",
     color: "from-green-600 to-green-400",
-    border: "border-green-800/40",
-    bg: "bg-green-950/20",
+    border: "border-green-200",
+    bg: "bg-green-50",
   },
   {
     icon: Shield,
@@ -37,8 +37,8 @@ const pillars = [
     description:
       "Post-quantum cryptography, AI-driven threat detection, and zero-trust architectures securing the digital frontier.",
     color: "from-red-600 to-red-400",
-    border: "border-red-800/40",
-    bg: "bg-red-950/20",
+    border: "border-red-200",
+    bg: "bg-red-50",
   },
   {
     icon: FlaskConical,
@@ -46,8 +46,8 @@ const pillars = [
     description:
       "Translating cutting-edge academic breakthroughs into deployable technologies through rigorous applied R&D programs.",
     color: "from-orange-600 to-orange-400",
-    border: "border-orange-800/40",
-    bg: "bg-orange-950/20",
+    border: "border-orange-200",
+    bg: "bg-orange-50",
   },
   {
     icon: Globe,
@@ -55,8 +55,8 @@ const pillars = [
     description:
       "Full-stack platforms, mobile applications, and API ecosystems built with modern architectures for global scale.",
     color: "from-blue-600 to-blue-400",
-    border: "border-blue-800/40",
-    bg: "bg-blue-950/20",
+    border: "border-blue-200",
+    bg: "bg-blue-50",
   },
 ];
 

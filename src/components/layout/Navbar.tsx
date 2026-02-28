@@ -23,7 +23,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-gray-200 shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -43,8 +43,8 @@ export function Navbar() {
                 className={cn(
                   "px-3 py-2 text-sm rounded-md transition-colors",
                   pathname === link.href
-                    ? "text-quantum-400 bg-quantum-950/50"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    ? "text-quantum-600 bg-quantum-50"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 )}
               >
                 {link.label}
@@ -62,7 +62,7 @@ export function Navbar() {
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/5"
+              className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -73,7 +73,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-white/10 bg-background/95 backdrop-blur-md">
+        <div className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
@@ -83,8 +83,8 @@ export function Navbar() {
                 className={cn(
                   "px-4 py-3 text-sm rounded-md transition-colors",
                   pathname === link.href
-                    ? "text-quantum-400 bg-quantum-950/50"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    ? "text-quantum-600 bg-quantum-50"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 )}
               >
                 {link.label}

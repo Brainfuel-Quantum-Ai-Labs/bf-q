@@ -12,9 +12,9 @@ const badgeVariants = cva(
         destructive: "border-transparent bg-destructive text-destructive-foreground",
         outline: "text-foreground",
         quantum:
-          "border-quantum-700 bg-quantum-950/50 text-quantum-400",
-        success: "border-green-700 bg-green-950/50 text-green-400",
-        warning: "border-yellow-700 bg-yellow-950/50 text-yellow-400",
+          "border-quantum-300 bg-quantum-50 text-quantum-700",
+        success: "border-green-300 bg-green-50 text-green-700",
+        warning: "border-yellow-300 bg-yellow-50 text-yellow-700",
       },
     },
     defaultVariants: {

@@ -18,7 +18,7 @@ const buttonVariants = cva(
         quantum:
           "bg-gradient-to-r from-quantum-600 to-quantum-500 text-white hover:from-quantum-500 hover:to-quantum-400 glow",
         "quantum-outline":
-          "border border-quantum-600 text-quantum-400 hover:bg-quantum-950/50",
+          "border border-quantum-600 text-quantum-600 hover:bg-quantum-50",
       },
       size: {
         default: "h-10 px-4 py-2",

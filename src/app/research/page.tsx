@@ -12,31 +12,31 @@ const typeConfig = {
     label: "Research",
     icon: BookOpen,
     variant: "quantum" as const,
-    tabActive: "bg-sky-900/50 border-sky-600/60 text-sky-300 scale-105",
-    tabIdle: "bg-sky-950/20 border-sky-900/40 text-sky-500 hover:border-sky-700/60",
-    glow: "rgba(14,165,233,0.12)",
-    cardBorder: "border-sky-800/40 hover:border-sky-600/60",
-    cardBg: "bg-sky-950/10",
+    tabActive: "bg-sky-100 border-sky-400 text-sky-700 scale-105",
+    tabIdle: "bg-white border-gray-200 text-gray-600 hover:border-sky-300",
+    glow: "rgba(14,165,233,0.08)",
+    cardBorder: "border-sky-200 hover:border-sky-400",
+    cardBg: "bg-sky-50",
   },
   NEWS: {
     label: "News",
     icon: Newspaper,
     variant: "secondary" as const,
-    tabActive: "bg-slate-700/50 border-slate-500/60 text-slate-200 scale-105",
-    tabIdle: "bg-slate-900/20 border-slate-800/40 text-slate-500 hover:border-slate-600/60",
-    glow: "rgba(148,163,184,0.10)",
-    cardBorder: "border-slate-700/40 hover:border-slate-500/60",
-    cardBg: "bg-slate-900/10",
+    tabActive: "bg-slate-100 border-slate-400 text-slate-700 scale-105",
+    tabIdle: "bg-white border-gray-200 text-gray-600 hover:border-slate-300",
+    glow: "rgba(148,163,184,0.08)",
+    cardBorder: "border-slate-200 hover:border-slate-400",
+    cardBg: "bg-slate-50",
   },
   UPDATE: {
     label: "Update",
     icon: RefreshCw,
     variant: "success" as const,
-    tabActive: "bg-green-900/50 border-green-600/60 text-green-300 scale-105",
-    tabIdle: "bg-green-950/20 border-green-900/40 text-green-500 hover:border-green-700/60",
-    glow: "rgba(34,197,94,0.12)",
-    cardBorder: "border-green-800/40 hover:border-green-600/60",
-    cardBg: "bg-green-950/10",
+    tabActive: "bg-green-100 border-green-400 text-green-700 scale-105",
+    tabIdle: "bg-white border-gray-200 text-gray-600 hover:border-green-300",
+    glow: "rgba(34,197,94,0.08)",
+    cardBorder: "border-green-200 hover:border-green-400",
+    cardBg: "bg-green-50",
   },
 };
 
@@ -68,15 +68,13 @@ export default function ResearchPage() {
     <div className="pt-16">
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-quantum-600/6 blur-[140px]" />
-          <div className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full bg-sky-900/8 blur-[100px]" />
-          <div className="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full bg-green-900/6 blur-[100px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-sm mb-6">
               <BookOpen className="w-3 h-3" /> Publications &amp; Insights
             </div>
             <h1 className="text-5xl sm:text-6xl font-bold mb-6">
@@ -93,10 +91,10 @@ export default function ResearchPage() {
               const isActive = filter === key;
               const Icon = key === "ALL" ? Layers : typeConfig[key as "RESEARCH"|"NEWS"|"UPDATE"].icon;
               const activeClass = key === "ALL"
-                ? "bg-quantum-900/50 border-quantum-600/60 text-quantum-300 scale-105"
+                ? "bg-quantum-100 border-quantum-400 text-quantum-700 scale-105"
                 : typeConfig[key as "RESEARCH"|"NEWS"|"UPDATE"].tabActive;
               const idleClass = key === "ALL"
-                ? "bg-quantum-950/20 border-quantum-900/40 text-quantum-500 hover:border-quantum-700/60"
+                ? "bg-white border-gray-200 text-gray-600 hover:border-quantum-300"
                 : typeConfig[key as "RESEARCH"|"NEWS"|"UPDATE"].tabIdle;
               return (
                 <button
@@ -106,7 +104,7 @@ export default function ResearchPage() {
                 >
                   <Icon className="w-4 h-4" />
                   {key === "ALL" ? "All Posts" : typeConfig[key as "RESEARCH"|"NEWS"|"UPDATE"].label}
-                  <span className={`px-1.5 py-0.5 rounded-md text-xs font-bold ${isActive ? "bg-white/20" : "bg-white/10"}`}>
+                  <span className={`px-1.5 py-0.5 rounded-md text-xs font-bold ${isActive ? "bg-white/50" : "bg-gray-100"}`}>
                     {counts[key]}
                   </span>
                 </button>
@@ -119,23 +117,23 @@ export default function ResearchPage() {
             const cfg = typeConfig[featured.type] ?? typeConfig.RESEARCH;
             return (
               <Link href={`/research/${featured.slug}`} className="group block mb-10">
-                <div className={`p-8 md:p-10 rounded-2xl border ${cfg.cardBorder} ${cfg.cardBg} bg-gradient-to-br from-quantum-950/60 to-quantum-900/20 hover:scale-[1.005] transition-all duration-300`}
+                <div className={`p-8 md:p-10 rounded-2xl border ${cfg.cardBorder} ${cfg.cardBg} bg-white hover:scale-[1.005] transition-all duration-300`}
                   style={{ boxShadow: `0 0 60px ${cfg.glow}` }}
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <Badge variant={cfg.variant}>{cfg.label}</Badge>
                     <span className="text-xs text-muted-foreground">{formatDate(featured.createdAt)}</span>
-                    <span className="ml-auto text-xs px-2 py-0.5 rounded-full border border-quantum-700/50 text-quantum-400">
+                    <span className="ml-auto text-xs px-2 py-0.5 rounded-full border border-quantum-200 text-quantum-600">
                       Featured
                     </span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-3 group-hover:text-quantum-300 transition-colors">
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-3 group-hover:text-quantum-600 transition-colors">
                     {featured.title}
                   </h2>
                   <p className="text-muted-foreground leading-relaxed mb-4 line-clamp-2 max-w-3xl">
                     {featured.content.replace(/[#*>`|]/g, "").slice(0, 220)}…
                   </p>
-                  <span className="inline-flex items-center gap-1 text-sm text-quantum-400 font-medium">
+                  <span className="inline-flex items-center gap-1 text-sm text-quantum-600 font-medium">
                     Read full paper <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
@@ -155,13 +153,13 @@ export default function ResearchPage() {
                         <Badge variant={cfg.variant}>{cfg.label}</Badge>
                         <span className="text-xs text-muted-foreground ml-auto">{formatDate(post.createdAt)}</span>
                       </div>
-                      <h2 className="text-lg font-semibold mb-3 group-hover:text-quantum-300 transition-colors flex-grow">
+                      <h2 className="text-lg font-semibold mb-3 group-hover:text-quantum-600 transition-colors flex-grow">
                         {post.title}
                       </h2>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
                         {post.content.replace(/[#*>`|]/g, "").slice(0, 150)}…
                       </p>
-                      <span className="inline-flex items-center gap-1 text-sm text-quantum-400 font-medium">
+                      <span className="inline-flex items-center gap-1 text-sm text-quantum-600 font-medium">
                         Read more <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                       </span>
                     </div>
@@ -176,10 +174,7 @@ export default function ResearchPage() {
           )}
 
           {/* CTA */}
-          <div className="mt-16 text-center p-10 rounded-2xl border border-white/10 bg-card relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-quantum-600/8 blur-[60px]" />
-            </div>
+          <div className="mt-16 text-center p-10 rounded-2xl border border-gray-200 bg-gray-50 relative overflow-hidden">
             <div className="relative">
               <h2 className="text-2xl font-bold mb-3">
                 Collaborate on <span className="gradient-text">Research</span>
@@ -190,7 +185,7 @@ export default function ResearchPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg shadow-quantum-900/30"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-quantum-600 to-quantum-500 text-white font-semibold hover:from-quantum-500 hover:to-quantum-400 transition-all shadow-lg"
               >
                 Partner with BF-Q Research <ArrowRight className="w-4 h-4" />
               </Link>

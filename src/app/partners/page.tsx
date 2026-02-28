@@ -24,10 +24,10 @@ const integrations = [
 ];
 
 const categoryColors: Record<string, string> = {
-  Cloud: "text-blue-400 border-blue-800/40 bg-blue-950/20",
-  Quantum: "text-quantum-400 border-quantum-800/40 bg-quantum-950/20",
-  Blockchain: "text-green-400 border-green-800/40 bg-green-950/20",
-  "AI/ML": "text-purple-400 border-purple-800/40 bg-purple-950/20",
+  Cloud: "text-blue-600 border-blue-200 bg-blue-50",
+  Quantum: "text-quantum-600 border-quantum-200 bg-quantum-50",
+  Blockchain: "text-green-600 border-green-200 bg-green-50",
+  "AI/ML": "text-purple-600 border-purple-200 bg-purple-50",
 };
 
 const partnershipTypes = [
@@ -81,7 +81,7 @@ export default function PartnersPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-quantum-400 animate-pulse" />
               Ecosystem Partners
             </div>
@@ -144,11 +144,11 @@ export default function PartnersPage() {
                   href={`/contact?partnership=${slug}`}
                   className="group block"
                 >
-                  <div className="p-8 rounded-xl border border-white/10 bg-card hover:border-quantum-700/50 transition-colors h-full">
-                    <Icon className="w-8 h-8 text-quantum-400 mb-4" />
+                  <div className="p-8 rounded-xl border border-gray-200 bg-white hover:border-quantum-300 shadow-sm transition-colors h-full">
+                    <Icon className="w-8 h-8 text-quantum-600 mb-4" />
                     <h3 className="text-xl font-semibold mb-3">{title}</h3>
                     <p className="text-muted-foreground leading-relaxed mb-6 text-sm">{description}</p>
-                    <span className="inline-flex items-center gap-1 text-sm text-quantum-400 hover:text-quantum-300 font-medium">
+                    <span className="inline-flex items-center gap-1 text-sm text-quantum-600 hover:text-quantum-700 font-medium">
                       {cta} <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
@@ -172,9 +172,9 @@ export default function PartnersPage() {
               {partnerBenefits.map(({ title, desc }) => (
                 <div
                   key={title}
-                  className="p-5 rounded-xl border border-quantum-800/30 bg-quantum-950/20 text-center"
+                  className="p-5 rounded-xl border border-gray-200 bg-quantum-50 text-center"
                 >
-                  <h3 className="font-semibold text-quantum-300 mb-2">{title}</h3>
+                  <h3 className="font-semibold text-quantum-700 mb-2">{title}</h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
                 </div>
               ))}

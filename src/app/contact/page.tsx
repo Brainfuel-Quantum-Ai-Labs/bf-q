@@ -64,13 +64,13 @@ export default function ContactPage() {
                   },
                 ].map(({ icon: Icon, label, value, href }) => (
                   <div key={label} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-quantum-950/60 border border-quantum-800/40 flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-quantum-400" />
+                    <div className="w-10 h-10 rounded-lg bg-quantum-50 border border-quantum-200 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-quantum-600" />
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">{label}</p>
                       {href ? (
-                        <a href={href} className="font-medium hover:text-quantum-400 transition-colors">
+                        <a href={href} className="font-medium hover:text-quantum-600 transition-colors">
                           {value}
                         </a>
                       ) : (
@@ -93,7 +93,7 @@ export default function ContactPage() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg border border-white/10 hover:border-quantum-700/50 hover:bg-quantum-950/30 transition-colors"
+                    className="p-3 rounded-lg border border-gray-200 hover:border-quantum-300 hover:bg-quantum-50 transition-colors"
                     aria-label={label}
                   >
                     <Icon className="w-5 h-5 text-muted-foreground" />
@@ -147,12 +147,12 @@ export default function ContactPage() {
                 </div>
 
                 {status === "success" && (
-                  <div className="p-4 rounded-lg bg-green-950/50 border border-green-800/40 text-green-400 text-sm">
+                  <div className="p-4 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm">
                     ✓ Message sent! We will get back to you within 24 hours.
                   </div>
                 )}
                 {status === "error" && (
-                  <div className="p-4 rounded-lg bg-red-950/50 border border-red-800/40 text-red-400 text-sm">
+                  <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
                     Something went wrong. Please try again or email us directly.
                   </div>
                 )}

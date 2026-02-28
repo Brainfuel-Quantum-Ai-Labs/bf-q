@@ -8,10 +8,9 @@ import { Button } from "@/components/ui/Button";
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Background glow */}
+      {/* Background subtle gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-quantum-600/10 blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-blue-600/10 blur-[100px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-quantum-50/30 to-transparent" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
@@ -20,7 +19,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-quantum-700/50 bg-quantum-950/50 text-quantum-400 text-sm font-medium mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-quantum-200 bg-quantum-50 text-quantum-600 text-sm font-medium mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-quantum-400 animate-pulse" />
           Quantum Intelligence. Now.
@@ -79,8 +78,8 @@ export function Hero() {
             { icon: Shield, value: "99.9%", label: "Security Uptime" },
           ].map(({ icon: Icon, value, label }) => (
             <div key={label} className="flex flex-col items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-quantum-950/80 border border-quantum-800 flex items-center justify-center">
-                <Icon className="w-5 h-5 text-quantum-400" />
+              <div className="w-10 h-10 rounded-lg bg-quantum-50 border border-gray-200 flex items-center justify-center">
+                <Icon className="w-5 h-5 text-quantum-600" />
               </div>
               <div className="text-3xl font-bold gradient-text">{value}</div>
               <div className="text-sm text-muted-foreground">{label}</div>
