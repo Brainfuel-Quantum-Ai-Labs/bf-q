@@ -1,0 +1,235 @@
+/**
+ * evolutionIntelligence.css
+ *
+ * CSS custom-property layer for the Evolution Intelligence Engine v4.
+ *
+ * All sizing values are expressed in relative units (rem / em / %) —
+ * never in hardcoded px — ensuring fluid scaling across viewport sizes
+ * and accessibility zoom levels.
+ *
+ * The engine patches these vars at runtime on :root via the mutation engine.
+ * Components consume them through the utility classes defined below.
+ */
+
+/* ─────────────────────────────────────────────
+   1. CSS Custom Properties (Design Tokens)
+   ───────────────────────────────────────────── */
+
+:root {
+  /* Typography */
+  --evo-font-scale: 1;
+  --evo-line-height: 1.6;
+  --evo-cta-weight: 600;
+
+  /* Spacing */
+  --evo-spacing-scale: 1;
+  --evo-card-padding: 1.5rem;
+  --evo-content-gap: 1.5rem;
+
+  /* Navigation */
+  --evo-nav-order: 0;
+
+  /* Transition (used by all animated evo elements) */
+  --evo-transition-duration: 0.25s;
+  --evo-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Cluster-driven accent overrides (default matches app theme) */
+  --evo-accent-hue: 199;
+  --evo-accent-sat: 89%;
+  --evo-accent-lit: 40%;
+}
+
+/* ─────────────────────────────────────────────
+   2. Base Evo Typography
+   ───────────────────────────────────────────── */
+
+.evo-text {
+  font-size: calc(1rem * var(--evo-font-scale));
+  line-height: var(--evo-line-height);
+  transition:
+    font-size var(--evo-transition-duration) var(--evo-transition-easing),
+    line-height var(--evo-transition-duration) var(--evo-transition-easing);
+}
+
+.evo-heading {
+  font-size: calc(1.5rem * var(--evo-font-scale));
+  line-height: calc(var(--evo-line-height) * 0.85);
+  font-weight: 700;
+}
+
+/* ─────────────────────────────────────────────
+   3. Layout Density Utilities
+   ───────────────────────────────────────────── */
+
+.evo-card {
+  padding: calc(var(--evo-card-padding) * var(--evo-spacing-scale));
+  transition: padding var(--evo-transition-duration) var(--evo-transition-easing);
+}
+
+.evo-stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--evo-content-gap) * var(--evo-spacing-scale));
+  transition: gap var(--evo-transition-duration) var(--evo-transition-easing);
+}
+
+.evo-grid {
+  display: grid;
+  gap: calc(var(--evo-content-gap) * var(--evo-spacing-scale));
+  transition: gap var(--evo-transition-duration) var(--evo-transition-easing);
+}
+
+/* ─────────────────────────────────────────────
+   4. Cluster-Specific Personalisation Classes
+   ───────────────────────────────────────────── */
+
+/* Explorer — richer UI, wider gaps, feature highlights */
+.evo-cluster-explorer {
+  --evo-content-gap: 2rem;
+  --evo-card-padding: 2rem;
+  --evo-line-height: 1.7;
+}
+
+/* Decisive Buyer — tight layout, strong CTA */
+.evo-cluster-decisiveBuyer {
+  --evo-font-scale: 0.95;
+  --evo-spacing-scale: 0.85;
+  --evo-cta-weight: 700;
+  --evo-card-padding: 1rem;
+}
+
+/* Slow Reader — maximum readability */
+.evo-cluster-slowReader {
+  --evo-font-scale: 1.08;
+  --evo-line-height: 1.9;
+  --evo-content-gap: 2.25rem;
+}
+
+/* Mobile Heavy — bottom-nav focus, touch-friendly targets */
+.evo-cluster-mobileHeavy {
+  --evo-card-padding: 1.25rem;
+  --evo-content-gap: 1.25rem;
+  --evo-nav-order: 999; /* push nav to bottom of stacking order */
+}
+
+/* Power User — compact density, shortcuts visible */
+.evo-cluster-powerUser {
+  --evo-font-scale: 0.9;
+  --evo-spacing-scale: 0.75;
+  --evo-card-padding: 0.875rem;
+  --evo-content-gap: 0.875rem;
+  --evo-line-height: 1.4;
+}
+
+/* Passive Scroller — gentle nudge layout */
+.evo-cluster-passiveScroller {
+  --evo-card-padding: 1.75rem;
+  --evo-content-gap: 1.75rem;
+  --evo-line-height: 1.65;
+}
+
+/* ─────────────────────────────────────────────
+   5. CTA Variants
+   ───────────────────────────────────────────── */
+
+.evo-cta {
+  font-weight: var(--evo-cta-weight);
+  transition:
+    font-weight var(--evo-transition-duration) var(--evo-transition-easing),
+    transform var(--evo-transition-duration) var(--evo-transition-easing);
+}
+
+.evo-cta--strong {
+  --evo-cta-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.evo-cta--subtle {
+  --evo-cta-weight: 500;
+  letter-spacing: 0;
+}
+
+/* ─────────────────────────────────────────────
+   6. Mutation Transition Guard
+   Prevents visible layout shift during CSS-var updates
+   ───────────────────────────────────────────── */
+
+.evo-transition-guard * {
+  transition:
+    padding var(--evo-transition-duration) var(--evo-transition-easing),
+    gap var(--evo-transition-duration) var(--evo-transition-easing),
+    font-size var(--evo-transition-duration) var(--evo-transition-easing),
+    line-height var(--evo-transition-duration) var(--evo-transition-easing);
+}
+
+/* ─────────────────────────────────────────────
+   7. Stability Indicator
+   Optional visual badge rendered by EvolutionDemo
+   ───────────────────────────────────────────── */
+
+.evo-stability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  opacity: 0.85;
+}
+
+.evo-stability-badge--healthy {
+  color: #16a34a; /* green-600 */
+}
+
+.evo-stability-badge--degraded {
+  color: #d97706; /* amber-600 */
+}
+
+.evo-stability-badge--critical {
+  color: #dc2626; /* red-600 */
+}
+
+/* ─────────────────────────────────────────────
+   8. Navigation Evolution
+   ───────────────────────────────────────────── */
+
+.evo-nav-item {
+  order: var(--evo-nav-order, 0);
+  transition: order 0s; /* order is not animatable, but keeps the rule explicit */
+}
+
+/* Promoted (high-weight) nav items */
+.evo-nav-item--promoted {
+  font-weight: 600;
+}
+
+/* Demoted (low-weight) nav items */
+.evo-nav-item--demoted {
+  opacity: 0.65;
+  font-size: 0.875em;
+}
+
+/* ─────────────────────────────────────────────
+   9. Feature Highlight (Explorer / PowerUser)
+   ───────────────────────────────────────────── */
+
+.evo-feature-highlight {
+  position: relative;
+}
+
+.evo-feature-highlight::after {
+  content: "";
+  position: absolute;
+  inset: -0.25rem;
+  border-radius: inherit;
+  border: 2px solid hsl(var(--evo-accent-hue) var(--evo-accent-sat) var(--evo-accent-lit) / 0.35);
+  pointer-events: none;
+  animation: evo-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes evo-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 0.7;  transform: scale(1.015); }
+}
