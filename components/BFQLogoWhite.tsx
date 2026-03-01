@@ -5,6 +5,8 @@ export default function BFQLogoWhite({
   width?: number;
   className?: string;
 }) {
+  const gradientId = "bfqGradientWhite";
+
   return (
     <svg
       width={width}
@@ -13,17 +15,14 @@ export default function BFQLogoWhite({
       className={className}
     >
       <defs>
-        <linearGradient id="bfqGradient" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#19C3FF" />
           <stop offset="100%" stopColor="#2F5BFF" />
         </linearGradient>
       </defs>
 
-      {/* White Background */}
-      <rect width="100%" height="100%" fill="#FFFFFF" />
-
       {/* Brain Shape */}
-      <g transform="translate(100,80)" stroke="url(#bfqGradient)" fill="none">
+      <g transform="translate(100,80)" stroke={`url(#${gradientId})`} fill="none">
 
         {/* Outer Brain */}
         <path
@@ -47,23 +46,23 @@ export default function BFQLogoWhite({
         />
 
         {/* Left Circuits */}
-        <circle cx="200" cy="180" r="10" fill="url(#bfqGradient)" />
+        <circle cx="200" cy="180" r="10" fill={`url(#${gradientId})`} />
         <line x1="200" y1="180" x2="250" y2="180" strokeWidth="12" />
 
-        <circle cx="190" cy="260" r="10" fill="url(#bfqGradient)" />
+        <circle cx="190" cy="260" r="10" fill={`url(#${gradientId})`} />
         <line x1="190" y1="260" x2="250" y2="260" strokeWidth="12" />
 
-        <circle cx="200" cy="340" r="10" fill="url(#bfqGradient)" />
+        <circle cx="200" cy="340" r="10" fill={`url(#${gradientId})`} />
         <line x1="200" y1="340" x2="250" y2="340" strokeWidth="12" />
 
         {/* Right Circuits */}
-        <circle cx="400" cy="180" r="10" fill="url(#bfqGradient)" />
+        <circle cx="400" cy="180" r="10" fill={`url(#${gradientId})`} />
         <line x1="350" y1="180" x2="400" y2="180" strokeWidth="12" />
 
-        <circle cx="410" cy="260" r="10" fill="url(#bfqGradient)" />
+        <circle cx="410" cy="260" r="10" fill={`url(#${gradientId})`} />
         <line x1="350" y1="260" x2="410" y2="260" strokeWidth="12" />
 
-        <circle cx="400" cy="340" r="10" fill="url(#bfqGradient)" />
+        <circle cx="400" cy="340" r="10" fill={`url(#${gradientId})`} />
         <line x1="350" y1="340" x2="400" y2="340" strokeWidth="12" />
 
         {/* Orbit Ring */}
@@ -85,7 +84,7 @@ export default function BFQLogoWhite({
         fontSize="110"
         fontWeight="800"
         fontFamily="Inter, Montserrat, Arial"
-        fill="#0A0A0D"
+        fill="#FFFFFF"
         letterSpacing="4"
       >
         BRAINFUEL
@@ -98,7 +97,7 @@ export default function BFQLogoWhite({
         fontSize="44"
         fontWeight="600"
         fontFamily="Inter, Montserrat, Arial"
-        fill="#0A0A0D"
+        fill="#FFFFFF"
         letterSpacing="8"
       >
         QUANTUM AI LABS
