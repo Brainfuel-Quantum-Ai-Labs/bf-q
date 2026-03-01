@@ -165,12 +165,14 @@ export function useEvolutionEngine(
         return;
       }
 
-      // --- Determine cluster ---
+      // --- Determine cluster (read latest via functional state update) ---
       const newCluster = clusterFromMetrics(metrics);
-      if (newCluster !== cluster) {
-        setCluster(newCluster);
-        trackClusterAssigned(sessionId, newCluster);
-      }
+      setCluster((prev) => {
+        if (prev !== newCluster) {
+          trackClusterAssigned(sessionId, newCluster);
+        }
+        return newCluster;
+      });
 
       // --- Compute reward ---
       const elapsed = (Date.now() - startTime) / 60_000;
@@ -223,7 +225,7 @@ export function useEvolutionEngine(
     return () => {
       clearTimeout(frameId);
     };
-  // Only re-create the loop if the interval or sessionId changes
+  // cluster is read via functional setState to avoid stale closure
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId, evaluationIntervalMs]);
 

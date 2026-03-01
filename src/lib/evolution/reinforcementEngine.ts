@@ -30,6 +30,9 @@ export function computeReward(inputs: RewardInputs): number {
   );
 }
 
+/** Trial lifecycle state — mutually exclusive stages. */
+export type MutationStatus = "pending" | "reinforced" | "rolledBack";
+
 /** Outcome record for a single mutation trial. */
 export interface MutationRecord {
   mutationId: string;
@@ -39,7 +42,10 @@ export interface MutationRecord {
   currentReward: number;
   /** Samples observed since the mutation was applied */
   sampleCount: number;
+  status: MutationStatus;
+  /** @deprecated Use `status === "reinforced"` instead. */
   reinforced: boolean;
+  /** @deprecated Use `status === "rolledBack"` instead. */
   rolledBack: boolean;
 }
 
@@ -59,8 +65,9 @@ export function registerMutation(
     baselineReward,
     currentReward: baselineReward,
     sampleCount: 0,
-    reinforced: false,
-    rolledBack: false,
+    status: "pending",
+    get reinforced() { return this.status === "reinforced"; },
+    get rolledBack() { return this.status === "rolledBack"; },
   });
 }
 
@@ -78,20 +85,14 @@ export function observeReward(
   minSamplesBeforeDecision = 3
 ): MutationRecord | undefined {
   const record = ledger.get(mutationId);
-  if (!record || record.rolledBack) return record;
+  if (!record || record.status === "rolledBack") return record;
 
   record.currentReward = newReward;
   record.sampleCount += 1;
 
   if (record.sampleCount >= minSamplesBeforeDecision) {
     const delta = newReward - record.baselineReward;
-    if (delta >= 0) {
-      record.reinforced = true;
-      record.rolledBack = false;
-    } else {
-      record.rolledBack = true;
-      record.reinforced = false;
-    }
+    record.status = delta >= 0 ? "reinforced" : "rolledBack";
   }
 
   return record;
@@ -106,23 +107,21 @@ export function getMutationRecord(
 
 /** Return all active (not rolled-back) reinforced mutation IDs. */
 export function getReinforcedMutations(): MutationRecord[] {
-  return Array.from(ledger.values()).filter((r) => r.reinforced && !r.rolledBack);
+  return Array.from(ledger.values()).filter((r) => r.status === "reinforced");
 }
 
 /** Return all mutations pending a rollback decision. */
 export function getPendingMutations(): MutationRecord[] {
-  return Array.from(ledger.values()).filter(
-    (r) => !r.reinforced && !r.rolledBack
-  );
+  return Array.from(ledger.values()).filter((r) => r.status === "pending");
 }
 
 /** Overall stability score: ratio of reinforced to total decided mutations (0-1). */
 export function computeStabilityScore(): number {
   const decided = Array.from(ledger.values()).filter(
-    (r) => r.reinforced || r.rolledBack
+    (r) => r.status !== "pending"
   );
   if (decided.length === 0) return 1;
-  const reinforced = decided.filter((r) => r.reinforced).length;
+  const reinforced = decided.filter((r) => r.status === "reinforced").length;
   return reinforced / decided.length;
 }
 

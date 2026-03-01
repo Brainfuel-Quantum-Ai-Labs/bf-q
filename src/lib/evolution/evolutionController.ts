@@ -110,7 +110,7 @@ export function attemptMutation(
   // If there's an active mutation waiting for a decision, skip for now
   if (state.activeMutation) {
     const record = getMutationRecord(state.activeMutation.id);
-    if (record && !record.reinforced && !record.rolledBack) {
+    if (record && record.status === "pending") {
       return null;
     }
   }
@@ -146,7 +146,7 @@ export function feedReward(rewardInputs: RewardInputs): void {
 
   if (!record) return;
 
-  if (record.rolledBack) {
+  if (record.status === "rolledBack") {
     revertMutation(state.activeMutation);
     state.activeMutation = null;
   }

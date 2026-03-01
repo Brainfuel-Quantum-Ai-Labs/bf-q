@@ -28,6 +28,10 @@ export interface SessionMetrics {
   sessionId: string;
   /** Click-through rate: clicks / impressions (0-1) */
   ctr: number;
+  /** Raw click count — used for CTR computation */
+  clickCount: number;
+  /** Raw impression count — incremented by `trackImpression()` */
+  impressionCount: number;
   /** Scroll completion rate (0-1) */
   scrollCompletion: number;
   /** Total session duration in milliseconds */
@@ -36,8 +40,10 @@ export interface SessionMetrics {
   bounced: boolean;
   /** Conversion completion (0-1) */
   conversionRate: number;
-  /** Feature-usage frequency: hits per minute */
+  /** Feature-usage frequency: total hits per elapsed minute */
   featureUsageFreq: number;
+  /** Raw feature-use count — used for frequency computation */
+  featureUseCount: number;
   /** Navigation efficiency: goal reached / total steps (0-1) */
   navigationEfficiency: number;
   /** Drop-off targets with their occurrence counts */
@@ -51,23 +57,37 @@ export interface SessionMetrics {
 /** Lightweight in-memory store. Replace with IndexedDB / remote sink in prod. */
 const sessionStore = new Map<string, SessionMetrics>();
 
-const IMPRESSION_FLOOR = 1; // avoid division by zero
-
 function emptyMetrics(sessionId: string): SessionMetrics {
   return {
     sessionId,
     ctr: 0,
+    clickCount: 0,
+    impressionCount: 0,
     scrollCompletion: 0,
     sessionDuration: 0,
     bounced: true,
     conversionRate: 0,
     featureUsageFreq: 0,
+    featureUseCount: 0,
     navigationEfficiency: 0,
     dropOffZones: {},
     timeToAction: 0,
     startedAt: Date.now(),
     updatedAt: Date.now(),
   };
+}
+
+/**
+ * Record an impression (page view / component render) for a session.
+ * Call this once per meaningful page-level render to keep CTR accurate.
+ */
+export function trackImpression(sessionId: string): void {
+  if (!sessionStore.has(sessionId)) {
+    sessionStore.set(sessionId, emptyMetrics(sessionId));
+  }
+  const m = sessionStore.get(sessionId)!;
+  m.impressionCount += 1;
+  m.ctr = m.clickCount / m.impressionCount;
 }
 
 /** Ingest a single behavioural event and update the session snapshot. */
@@ -80,8 +100,8 @@ export function ingestEvent(sessionId: string, event: BehaviorEvent): void {
 
   switch (event.type) {
     case "click":
-      // Increment CTR numerator
-      m.ctr = Math.min(1, m.ctr + 1 / IMPRESSION_FLOOR);
+      m.clickCount += 1;
+      m.ctr = m.impressionCount > 0 ? m.clickCount / m.impressionCount : 0;
       m.bounced = false;
       if (m.timeToAction === 0) m.timeToAction = now - m.startedAt;
       break;
@@ -103,8 +123,9 @@ export function ingestEvent(sessionId: string, event: BehaviorEvent): void {
       break;
 
     case "feature_use": {
+      m.featureUseCount += 1;
       const elapsedMin = (now - m.startedAt) / 60_000 || 1;
-      m.featureUsageFreq = (m.featureUsageFreq * elapsedMin + 1) / elapsedMin;
+      m.featureUsageFreq = m.featureUseCount / elapsedMin;
       m.bounced = false;
       break;
     }
@@ -126,8 +147,6 @@ export function ingestEvent(sessionId: string, event: BehaviorEvent): void {
       break;
   }
 
-  // Clamp ctr 0-1
-  m.ctr = Math.min(1, m.ctr);
   m.updatedAt = now;
 }
 

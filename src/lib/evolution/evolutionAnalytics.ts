@@ -170,8 +170,11 @@ export async function flush(endpoint?: string): Promise<void> {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ events: eventLog }),
     });
-  } catch {
-    // Silently fail – analytics must never break the product
+  } catch (err) {
+    // Analytics must never break the product, but log in development for debugging
+    if (process.env.NODE_ENV === "development") {
+      console.error("[EvolutionAnalytics] flush failed:", err);
+    }
   }
 }
 

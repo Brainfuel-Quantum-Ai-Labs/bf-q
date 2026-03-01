@@ -41,7 +41,12 @@ export function clearNavHits(): void {
  * Returns a map of path → normalised weight (0-1).
  */
 function computeWeights(paths: string[]): Map<string, number> {
-  const max = Math.max(1, ...paths.map((p) => hitCounts.get(p) ?? 0));
+  let max = 0;
+  for (const p of paths) {
+    const count = hitCounts.get(p) ?? 0;
+    if (count > max) max = count;
+  }
+  if (max === 0) max = 1; // avoid division by zero
   const weights = new Map<string, number>();
   for (const path of paths) {
     weights.set(path, (hitCounts.get(path) ?? 0) / max);

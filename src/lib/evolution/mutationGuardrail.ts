@@ -46,6 +46,9 @@ export interface MutationPayload {
 // Colour contrast helpers (WCAG 2.1)
 // ---------------------------------------------------------------------------
 
+const HEX_COLOR_RE = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i;
+const RGB_COLOR_RE = /^rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/;
+
 function hexToLinear(channel: number): number {
   const c = channel / 255;
   return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
@@ -61,7 +64,7 @@ function relativeLuminance(r: number, g: number, b: number): number {
 
 function parseColor(color: string): [number, number, number] | null {
   // #RRGGBB
-  const hex = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
+  const hex = HEX_COLOR_RE.exec(color);
   if (hex) {
     return [
       parseInt(hex[1], 16),
@@ -70,7 +73,7 @@ function parseColor(color: string): [number, number, number] | null {
     ];
   }
   // rgb(r, g, b)
-  const rgb = /^rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/.exec(color);
+  const rgb = RGB_COLOR_RE.exec(color);
   if (rgb) {
     return [parseInt(rgb[1]), parseInt(rgb[2]), parseInt(rgb[3])];
   }
