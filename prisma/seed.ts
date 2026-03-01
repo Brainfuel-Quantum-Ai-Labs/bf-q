@@ -73,6 +73,14 @@ async function main() {
           "Enterprise-grade secrets management and PKI solution with AI-driven threat detection and automated certificate lifecycle management.",
         links: ["https://vault.bf-q.com"],
       },
+      {
+        title: "QuantumMind Hybrid Engine",
+        slug: "quantummind-hybrid-engine",
+        category: "Quantum Computing",
+        summary:
+          "Production-ready quantum-classical hybrid computing platform. Seamlessly dispatch variational circuits to IBM Quantum, IonQ, Rigetti, and QuEra QPUs from a unified Python SDK.",
+        links: ["https://quantum.bf-q.com/docs"],
+      },
     ],
   });
 

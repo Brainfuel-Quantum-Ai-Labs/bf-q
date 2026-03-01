@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const categoryBorderColors: Record<string, string> = {
   "AI Platform": "border-quantum-800/40",
+  "Quantum Computing": "border-sky-800/40",
   Blockchain: "border-green-800/40",
   "Developer Tools": "border-purple-800/40",
   Security: "border-red-800/40",
@@ -34,6 +35,7 @@ const categoryBorderColors: Record<string, string> = {
 
 const categoryIconColors: Record<string, string> = {
   "AI Platform": "text-quantum-400",
+  "Quantum Computing": "text-sky-400",
   Blockchain: "text-green-400",
   "Developer Tools": "text-purple-400",
   Security: "text-red-400",

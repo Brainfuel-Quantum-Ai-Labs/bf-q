@@ -14,6 +14,13 @@ const products = [
     gradient: "from-quantum-600 to-quantum-500",
   },
   {
+    title: "QuantumMind Hybrid Engine",
+    category: "Quantum Computing",
+    slug: "quantummind-hybrid-engine",
+    description: "Production-ready quantum-classical hybrid platform. Dispatch variational circuits to IBM Quantum, IonQ, Rigetti, and QuEra from a unified SDK.",
+    gradient: "from-sky-600 to-cyan-500",
+  },
+  {
     title: "QuantumLedger SDK",
     category: "Blockchain",
     slug: "quantumledger-sdk",

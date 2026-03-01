@@ -11,6 +11,7 @@ const footerLinks = {
   ],
   Products: [
     { label: "BF-Q Inference API", href: "/products/bf-q-inference-api" },
+    { label: "QuantumMind Hybrid Engine", href: "/products/quantummind-hybrid-engine" },
     { label: "QuantumLedger SDK", href: "/products/quantumledger-sdk" },
     { label: "NeuroCraft Studio", href: "/products/neurocraft-studio" },
     { label: "SecureVault Enterprise", href: "/products/securevault-enterprise" },

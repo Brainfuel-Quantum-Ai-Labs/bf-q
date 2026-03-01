@@ -124,6 +124,36 @@ export const staticProducts = [
   },
   {
     id: "static-5",
+    title: "QuantumMind Hybrid Engine",
+    slug: "quantummind-hybrid-engine",
+    category: "Quantum Computing",
+    summary:
+      "Production-ready quantum-classical hybrid computing platform. Seamlessly dispatch variational circuits to IBM Quantum, IonQ, Rigetti, and QuEra QPUs from a unified Python SDK.",
+    description:
+      "QuantumMind Hybrid Engine is BF-Q's flagship quantum middleware platform. It abstracts QPU hardware differences behind a clean API, letting teams run variational quantum algorithms, quantum machine learning kernels, and combinatorial optimisation workloads without deep knowledge of individual provider quirks. The engine handles circuit transpilation, noise-adaptive calibration, error mitigation, and result post-processing automatically — so engineers can focus on algorithm design rather than hardware plumbing.",
+    features: [
+      "Unified API across IBM Quantum, IonQ, Rigetti & QuEra",
+      "Automated circuit transpilation & depth optimisation",
+      "Noise-adaptive error mitigation (ZNE, PEC, CDR)",
+      "Variational Quantum Eigensolver (VQE) & QAOA primitives",
+      "Quantum machine learning layer (quantum neural networks)",
+      "Hybrid workflow orchestration via Python SDK & REST API",
+      "Real-time circuit simulation (up to 30 qubits) for pre-QPU validation",
+      "OpenTelemetry-native job tracing & cost tracking",
+    ],
+    useCases: [
+      "Combinatorial optimisation (logistics, portfolio, scheduling)",
+      "Quantum chemistry & drug-discovery molecular simulation",
+      "Quantum-enhanced machine learning feature maps",
+      "Cryptographic key generation & quantum random number generation",
+    ],
+    links: ["https://quantum.bf-q.com/docs"],
+    gradient: "from-sky-800 to-cyan-700",
+    iconColor: "text-sky-400",
+    createdAt: new Date("2024-06-01"),
+  },
+  {
+    id: "static-6",
     title: "Coretex Studio",
     slug: "coretex-studio",
     category: "AI Platform",

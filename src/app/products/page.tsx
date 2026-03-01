@@ -8,6 +8,7 @@ import { ArrowRight, CheckCircle2, ExternalLink, Layers } from "lucide-react";
 
 const categoryGradients: Record<string, string> = {
   "AI Platform": "from-quantum-600 to-quantum-500",
+  "Quantum Computing": "from-sky-600 to-cyan-500",
   Blockchain: "from-green-600 to-green-500",
   "Developer Tools": "from-purple-600 to-purple-500",
   Security: "from-red-600 to-red-500",
@@ -15,6 +16,7 @@ const categoryGradients: Record<string, string> = {
 
 const categoryBorders: Record<string, string> = {
   "AI Platform": "border-quantum-200 hover:border-quantum-400 shadow-sm",
+  "Quantum Computing": "border-sky-200 hover:border-sky-400 shadow-sm",
   Blockchain: "border-green-200 hover:border-green-400 shadow-sm",
   "Developer Tools": "border-purple-200 hover:border-purple-400 shadow-sm",
   Security: "border-red-200 hover:border-red-400 shadow-sm",
@@ -22,6 +24,7 @@ const categoryBorders: Record<string, string> = {
 
 const categoryIconColors: Record<string, string> = {
   "AI Platform": "text-quantum-600",
+  "Quantum Computing": "text-sky-600",
   Blockchain: "text-green-600",
   "Developer Tools": "text-purple-600",
   Security: "text-red-600",
@@ -29,6 +32,7 @@ const categoryIconColors: Record<string, string> = {
 
 const categoryTabActive: Record<string, string> = {
   "AI Platform": "bg-sky-100 border-sky-400 text-sky-700 scale-105",
+  "Quantum Computing": "bg-cyan-100 border-cyan-400 text-cyan-700 scale-105",
   Blockchain: "bg-green-100 border-green-400 text-green-700 scale-105",
   "Developer Tools": "bg-purple-100 border-purple-400 text-purple-700 scale-105",
   Security: "bg-red-100 border-red-400 text-red-700 scale-105",
@@ -36,6 +40,7 @@ const categoryTabActive: Record<string, string> = {
 
 const categoryTabIdle: Record<string, string> = {
   "AI Platform": "bg-white border-gray-200 text-gray-600 hover:border-sky-300",
+  "Quantum Computing": "bg-white border-gray-200 text-gray-600 hover:border-cyan-300",
   Blockchain: "bg-white border-gray-200 text-gray-600 hover:border-green-300",
   "Developer Tools": "bg-white border-gray-200 text-gray-600 hover:border-purple-300",
   Security: "bg-white border-gray-200 text-gray-600 hover:border-red-300",
@@ -43,6 +48,7 @@ const categoryTabIdle: Record<string, string> = {
 
 const categoryGlow: Record<string, string> = {
   "AI Platform": "rgba(14,165,233,0.14)",
+  "Quantum Computing": "rgba(6,182,212,0.14)",
   Blockchain: "rgba(34,197,94,0.14)",
   "Developer Tools": "rgba(168,85,247,0.14)",
   Security: "rgba(239,68,68,0.14)",
