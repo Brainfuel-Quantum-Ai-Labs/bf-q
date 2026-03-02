@@ -265,6 +265,12 @@ Vercel Postgres uses PgBouncer (connection pooling) which is incompatible with `
 
 ---
 
+## Brand Attribution
+
+> Designed & Developed by BrainFuel Quantum AI Labs — India
+
+---
+
 ## License
 
 Proprietary — © 2025 BrainFuel Quantum AI Labs. All rights reserved.

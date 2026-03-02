@@ -21,9 +21,13 @@ export const metadata: Metadata = {
     "Navi Mumbai",
     "India",
   ],
-  authors: [{ name: "Mohsin Agwan", url: "https://www.bf-q.com" }],
+  authors: [{ name: "BrainFuel Quantum AI Labs", url: "https://www.bf-q.com" }],
   creator: "BrainFuel Quantum AI Labs",
   metadataBase: new URL("https://www.bf-q.com"),
+  other: {
+    "geo.region": "IN",
+    "geo.country": "India",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
