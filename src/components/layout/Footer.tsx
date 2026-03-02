@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Zap, Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import BFQLogoWhite from "@/components/BFQLogoWhite";
 
 const footerLinks = {
   Company: [
@@ -31,10 +32,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-quantum-400 to-quantum-600 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-bold text-lg gradient-text">BF-Q Labs</span>
+              <BFQLogoWhite width={160} />
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
               Pioneering the convergence of quantum computing, AI, and blockchain technologies.
