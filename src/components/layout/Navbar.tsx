@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import BFQLogoWhite from "@/components/BFQLogoWhite";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -28,9 +29,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-quantum-400 to-quantum-600 flex items-center justify-center glow">
-              <Zap className="w-5 h-5 text-white" />
-            </div>
+            <BFQLogoWhite width={40} className="rounded-lg" />
             <span className="font-bold text-lg gradient-text hidden sm:block">BF-Q Labs</span>
           </Link>
 

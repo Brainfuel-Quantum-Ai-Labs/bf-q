@@ -19,9 +19,6 @@ export default function BFQLogoWhite({
         </linearGradient>
       </defs>
 
-      {/* White Background */}
-      <rect width="100%" height="100%" fill="#FFFFFF" />
-
       {/* Brain Shape */}
       <g transform="translate(100,80)" stroke="url(#bfqGradient)" fill="none">
 
