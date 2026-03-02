@@ -70,6 +70,44 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
+## Deploy to Railway
+
+Railway auto-detects this project as a Next.js app via `railway.json` (Nixpacks builder).
+
+### Environment Variables
+
+Set the following in **Railway → Service → Variables**:
+
+| Variable | Description |
+|---|---|
+| `PORT` | Set automatically by Railway — no action needed |
+| `NODE_ENV` | Set to `production` (optional; Railway may set this automatically) |
+| `DATABASE_URL` | PostgreSQL connection string |
+| `NEXTAUTH_URL` | Your deployed Railway URL, e.g. `https://your-app.up.railway.app` |
+| `NEXTAUTH_SECRET` | Random 32+ char secret — generate with `openssl rand -base64 32` |
+| `GOOGLE_CLIENT_ID` | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
+| `LINKEDIN_CLIENT_ID` | LinkedIn OAuth client ID |
+| `LINKEDIN_CLIENT_SECRET` | LinkedIn OAuth client secret |
+| `NEXT_PUBLIC_APP_URL` | Public app URL, e.g. `https://your-app.up.railway.app` |
+
+### Build & Start Commands
+
+These are configured in `railway.json` and applied automatically:
+
+- **Build command:** `npm ci && npm run build`
+- **Start command:** `npm run start` (uses `$PORT` supplied by Railway)
+
+### Database Migrations
+
+Railway does **not** run `prisma migrate deploy` automatically. Run migrations manually from your local machine against the Railway Postgres connection string:
+
+```bash
+DATABASE_URL="<your-railway-postgres-url>" npm run db:deploy
+```
+
+---
+
 ## Deploy on Vercel
 
 ### Environment Variables
