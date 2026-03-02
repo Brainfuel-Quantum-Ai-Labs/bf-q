@@ -96,14 +96,12 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col items-center gap-2 text-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} BrainFuel Quantum AI Labs. All rights reserved.
           </p>
-          <p className="text-sm text-muted-foreground">
-            Founded by{" "}
-            <span className="text-quantum-600 font-medium">Mohsin Agwan</span> · Navi Mumbai,
-            India
+          <p className="text-xs text-muted-foreground">
+            Designed &amp; Developed by BrainFuel Quantum AI Labs — India
           </p>
         </div>
       </div>
