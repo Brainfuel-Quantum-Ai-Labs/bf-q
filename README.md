@@ -152,6 +152,15 @@ These are configured in `railway.json` and applied automatically:
 - **Build command:** `npm ci && npm run build`
 - **Start command:** `npm run start` (uses `$PORT` supplied by Railway)
 
+### Standalone API Service (optional)
+
+The `services/api/` directory contains a standalone Express backend that can be deployed as a **second Railway service** alongside the Next.js app:
+
+1. In your Railway project, create a new service from the same repository.
+2. Set **Root Directory** to `services/api`.
+3. Set the environment variables listed in `services/api/.env.example`.
+4. Railway auto-detects Node.js, runs `npm run build && npm start`.
+
 ### Database Migrations
 
 Railway does **not** run `prisma migrate deploy` automatically. Run migrations manually from your local machine against the Railway Postgres connection string:
@@ -241,10 +250,15 @@ src/
 │   ├── api/                # REST API endpoints
 │   │   ├── auth/           # NextAuth + registration
 │   │   ├── health/         # Health check endpoint (no DB)
+│   │   ├── me/             # Current user (Supabase JWT / session)
+│   │   ├── admin/users/    # Admin user list (Supabase service key)
 │   │   ├── projects/       # CRUD projects
 │   │   ├── products/       # CRUD products
 │   │   ├── posts/          # CRUD posts
 │   │   └── contact/        # Contact form handler
+│   ├── auth/               # Supabase auth pages (login / signup)
+│   ├── dashboard/          # Protected user dashboard
+│   ├── admin/              # Admin panel (admin role required)
 │   ├── about/
 │   ├── services/
 │   ├── products/           # Listing + [slug] detail
@@ -253,19 +267,33 @@ src/
 │   ├── investors/
 │   ├── partners/
 │   ├── contact/
-│   └── portal/             # login / signup / dashboard / admin
+│   └── portal/             # legacy NextAuth portal (login / signup / dashboard / admin)
 ├── components/
 │   ├── layout/             # Navbar, Footer
 │   ├── sections/           # Hero, TechPillars, ProductSlider
 │   └── ui/                 # Button, Card, Badge, Input, Textarea
 ├── lib/
+│   ├── supabase/           # Supabase client utilities
+│   │   ├── client.ts       # Browser client
+│   │   └── server.ts       # Server client (async cookies)
 │   ├── auth.ts             # NextAuth configuration
 │   ├── prisma.ts           # Prisma client singleton
 │   └── utils.ts            # cn(), formatDate(), slugify()
-└── middleware.ts            # Security headers + route protection
+└── middleware.ts            # Security headers + Supabase/NextAuth route protection
 prisma/
 ├── schema.prisma
 └── seed.ts
+supabase/
+└── migrations/
+    └── 001_rls_policies.sql  # RLS for profiles, files, audit_logs
+services/
+└── api/                    # Standalone Express backend (Railway)
+    ├── src/
+    │   ├── index.ts        # Server entrypoint + /health
+    │   ├── routes.ts       # /me + /admin/users
+    │   └── auth.ts         # Supabase JWT middleware
+    ├── package.json
+    └── README.md
 docker-compose.yml           # Local Postgres dev environment
 ```
 
