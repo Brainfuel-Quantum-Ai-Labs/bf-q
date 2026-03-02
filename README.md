@@ -141,6 +141,18 @@ Set the following in **Vercel → Project → Settings → Environment Variables
 
 Vercel's default `npm run build` works. The `postinstall` hook runs `prisma generate` automatically before the build — no extra build command configuration needed.
 
+> **Note:** `DATABASE_URL` is **not required at build time**. The build runs `next build` only; no migrations or DB queries happen during the Vercel build step. `DATABASE_URL` is required at **runtime** for any DB-backed API routes or pages.
+
+### Running migrations on Vercel
+
+Vercel build containers cannot reach your database, so migrations must be run separately:
+
+- **Automatic (recommended):** Push changes to `prisma/migrations/` or `prisma/schema.prisma` on `main`. The [Migrate Database](.github/workflows/migrate.yml) GitHub Actions workflow runs `npm run migrate:deploy` automatically using the `DATABASE_URL` secret stored in GitHub repository secrets.
+- **Manual:** Run from your local machine against the production DB:
+  ```bash
+  DATABASE_URL="<your-production-db-url>" npm run migrate:deploy
+  ```
+
 ---
 
 ## Available Scripts
@@ -148,14 +160,17 @@ Vercel's default `npm run build` works. The `postinstall` hook runs `prisma gene
 | Script | Description |
 |---|---|
 | `npm run dev` | Start development server |
-| `npm run build` | Production build |
+| `npm run build` | Production build (no DB needed) |
 | `npm run start` | Start production server |
 | `npm run lint` | ESLint check |
 | `npm run format` | Prettier format |
-| `npm run db:generate` | Generate Prisma client |
+| `npm run migrate:deploy` | Apply pending migrations (CI/prod) |
+| `npm run migrate:dev` | Create & apply dev migrations |
+| `npm run prisma:generate` | Generate Prisma client |
+| `npm run db:generate` | Generate Prisma client (alias) |
 | `npm run db:push` | Push schema to DB (no migrations) |
-| `npm run db:migrate` | Create & apply dev migrations |
-| `npm run db:deploy` | Apply pending migrations (CI/prod) |
+| `npm run db:migrate` | Create & apply dev migrations (alias) |
+| `npm run db:deploy` | Apply pending migrations (alias) |
 | `npm run db:seed` | Seed database with sample data |
 
 ---
