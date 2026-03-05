@@ -43,3 +43,5 @@ jobs:
           NEXTAUTH_SECRET: "ci-secret-placeholder-32-chars-long"
           NEXT_PUBLIC_APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_APP_NAME: "BrainFuel Quantum AI Labs"
+          NEXT_PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "placeholder-anon-key"
