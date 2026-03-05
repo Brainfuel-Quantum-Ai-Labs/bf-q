@@ -1,17 +1,88 @@
-version: "3.9"
-
 services:
-  db:
+  # ── Infrastructure ───────────────────────────────────────────────────────────
+  postgres:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: bfq
-      POSTGRES_PASSWORD: bfq_local_password
-      POSTGRES_DB: bfq_db
+      POSTGRES_USER: ${POSTGRES_USER:-bfq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-bfq_local_password}
+      POSTGRES_DB: ${POSTGRES_DB:-bfq_db}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bfq} -d ${POSTGRES_DB:-bfq_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Application services ─────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    environment:
+      PORT: "3000"
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL:-postgresql://bfq:bfq_local_password@postgres:5432/bfq_db}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-changeme-use-openssl-rand-base64-32}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME:-BrainFuel Quantum AI Labs}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      LINKEDIN_CLIENT_ID: ${LINKEDIN_CLIENT_ID:-}
+      LINKEDIN_CLIENT_SECRET: ${LINKEDIN_CLIENT_SECRET:-}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: apps/worker
+    restart: unless-stopped
+    environment:
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://bfq:bfq_local_password@postgres:5432/bfq_db}
+      SANDBOX_RUNNER_URL: ${SANDBOX_RUNNER_URL:-http://sandbox-runner:8080}
+      QUEUE_NAME: ${QUEUE_NAME:-sandbox-jobs}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-2}
+      WORKER_PORT: "3001"
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
+  sandbox-runner:
+    build:
+      context: apps/sandbox-runner
+    restart: unless-stopped
+    environment:
+      PORT: "8080"
+      NODE_ENV: production
+    # No host Docker socket mounted — the sandbox executes commands
+    # entirely within this container for security.
 
 volumes:
   postgres_data:
+  redis_data:

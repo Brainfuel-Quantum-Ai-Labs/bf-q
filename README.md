@@ -20,6 +20,78 @@ Pioneering the convergence of quantum computing, artificial intelligence, and bl
 
 ---
 
+## Docker Compose — Full Stack
+
+Run all services (API, Worker, Sandbox Runner, Postgres, Redis) with a single command.
+
+### Services
+
+| Service | Image / Build | Port | Description |
+|---|---|---|---|
+| `postgres` | `postgres:16-alpine` | 5432 | Primary PostgreSQL 16 database |
+| `redis` | `redis:7-alpine` | 6379 | Redis (job queue + cache) |
+| `api` | `apps/api/Dockerfile` | 3000 | Next.js API & frontend |
+| `worker` | `apps/worker/Dockerfile` | 3001 (health) | Background job worker (BullMQ) |
+| `sandbox-runner` | `apps/sandbox-runner/Dockerfile` | 8080 | Isolated job executor (no host socket) |
+
+### 1. Configure environment
+
+```bash
+cp .env.example .env
+# Edit .env — set NEXTAUTH_SECRET, OAuth keys, etc.
+```
+
+Generate a secure `NEXTAUTH_SECRET`:
+
+```bash
+openssl rand -base64 32
+```
+
+### 2. Build & start all services
+
+```bash
+docker compose up --build
+```
+
+To run in the background:
+
+```bash
+docker compose up --build -d
+```
+
+### 3. Run database migrations
+
+Wait until postgres is healthy, then:
+
+```bash
+docker compose exec api npm run db:deploy
+# Optionally seed sample data:
+docker compose exec api npm run db:seed
+```
+
+### 4. Open the app
+
+- **Web / API:** [http://localhost:3000](http://localhost:3000)
+- **Worker health:** [http://localhost:3001/health](http://localhost:3001/health)
+- **Sandbox Runner health:** [http://localhost:8080/health](http://localhost:8080/health)
+
+### 5. Stop all services
+
+```bash
+docker compose down
+# Remove volumes (wipes DB & Redis data):
+docker compose down -v
+```
+
+### Security notes
+
+- The `sandbox-runner` container runs commands **inside itself only** — no host Docker socket is mounted.
+- It executes only a strict allowlist of commands (npm, npx, node, etc.).
+- The container process runs as a non-root `sandbox` user.
+- The `worker` triggers jobs by calling the `sandbox-runner` HTTP endpoint — it never shells out on the host.
+
+---
+
 ## Local Development
 
 ### Prerequisites
@@ -45,13 +117,13 @@ cp .env.example .env.local
 
 The default `.env.example` already points to the local Docker database — no edits needed for local dev unless you change passwords.
 
-### 3. Start local Postgres
+### 3. Start local Postgres (dev-only, no worker/sandbox)
 
 ```bash
-docker compose up -d
+docker compose up postgres redis -d
 ```
 
-This starts a PostgreSQL 16 container on port 5432 with database `bfq_db`.
+This starts PostgreSQL 16 on port 5432 and Redis on port 6379.
 
 ### 4. Run migrations & seed
 
@@ -178,6 +250,15 @@ Vercel build containers cannot reach your database, so migrations must be run se
 ## Project Structure
 
 ```
+apps/
+├── api/
+│   └── Dockerfile              # Multi-stage Next.js build
+├── worker/
+│   ├── Dockerfile
+│   └── src/index.js            # BullMQ worker — delegates to sandbox-runner
+└── sandbox-runner/
+    ├── Dockerfile
+    └── src/index.js            # Isolated HTTP job executor
 src/
 ├── app/                    # Next.js App Router pages & API routes
 │   ├── api/                # REST API endpoints
@@ -208,7 +289,7 @@ src/
 prisma/
 ├── schema.prisma
 └── seed.ts
-docker-compose.yml           # Local Postgres dev environment
+docker-compose.yml           # Full-stack dev environment (5 services)
 ```
 
 ---
