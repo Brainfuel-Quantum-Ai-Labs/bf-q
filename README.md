@@ -12,8 +12,8 @@ Pioneering the convergence of quantum computing, artificial intelligence, and bl
 - **Framework:** Next.js 15 (App Router)
 - **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS + CSS Variables (dark mode by default)
-- **Database:** PostgreSQL via Prisma ORM
-- **Auth:** NextAuth.js (Credentials + Google + LinkedIn)
+- **Database:** PostgreSQL via Prisma ORM + Supabase (RLS, Storage, Auth)
+- **Auth:** NextAuth.js (Credentials + Google + LinkedIn) + Supabase Auth
 - **UI Components:** Radix UI primitives + CVA
 - **Animations:** Framer Motion
 - **Carousel:** Embla Carousel
@@ -142,6 +142,56 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
+## Supabase Setup
+
+### 1. Create a Supabase project
+
+Go to [supabase.com](https://supabase.com) → **New project**, choose a region, and set a database password.
+
+### 2. Apply database migrations
+
+From the Supabase dashboard, open the **SQL Editor** and run the migration file:
+
+```bash
+# Or apply via the Supabase CLI:
+supabase db push  # if using local dev with supabase CLI
+```
+
+The migration at `supabase/migrations/001_rls_policies.sql` creates:
+- **`profiles`** — user profiles with role (`user` / `admin`) and RLS
+- **`files`** — file metadata with owner-scoped RLS
+- **`audit_logs`** — append-only audit trail readable only by admins
+
+### 3. Configure environment variables
+
+Copy the values from **Supabase Dashboard → Project → Settings → API**:
+
+| Variable | Where to find it |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `anon` / public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | `service_role` key (keep secret) |
+| `SUPABASE_JWT_SECRET` | Settings → API → JWT Settings |
+
+### 4. Auth routes
+
+| Route | Description |
+|---|---|
+| `/auth/login` | Supabase email/password sign-in |
+| `/auth/signup` | Supabase account registration |
+| `/dashboard` | Protected — requires any authenticated user |
+| `/admin` | Protected — requires `role = admin` in `user_metadata` |
+
+To promote a user to admin, update their `user_metadata` in the Supabase dashboard or via the service-role API:
+
+```sql
+update auth.users
+set raw_user_meta_data = raw_user_meta_data || '{"role":"admin"}'::jsonb
+where email = 'admin@example.com';
+```
+
+---
+
 ## Deploy to Railway
 
 Railway auto-detects this project as a Next.js app via `railway.json` (Nixpacks builder).
@@ -162,6 +212,10 @@ Set the following in **Railway → Service → Variables**:
 | `LINKEDIN_CLIENT_ID` | LinkedIn OAuth client ID |
 | `LINKEDIN_CLIENT_SECRET` | LinkedIn OAuth client secret |
 | `NEXT_PUBLIC_APP_URL` | Public app URL, e.g. `https://your-app.up.railway.app` |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service-role key (server-only) |
+| `SUPABASE_JWT_SECRET` | Supabase JWT secret |
 
 ### Build & Start Commands
 
@@ -169,6 +223,15 @@ These are configured in `railway.json` and applied automatically:
 
 - **Build command:** `npm ci && npm run build`
 - **Start command:** `npm run start` (uses `$PORT` supplied by Railway)
+
+### Standalone API Service (optional)
+
+The `services/api/` directory contains a standalone Express backend that can be deployed as a **second Railway service** alongside the Next.js app:
+
+1. In your Railway project, create a new service from the same repository.
+2. Set **Root Directory** to `services/api`.
+3. Set the environment variables listed in `services/api/.env.example`.
+4. Railway auto-detects Node.js, runs `npm run build && npm start`.
 
 ### Database Migrations
 
@@ -196,6 +259,10 @@ Set the following in **Vercel → Project → Settings → Environment Variables
 | `LINKEDIN_CLIENT_ID` | LinkedIn OAuth client ID |
 | `LINKEDIN_CLIENT_SECRET` | LinkedIn OAuth client secret |
 | `NEXT_PUBLIC_APP_URL` | Public app URL, e.g. `https://www.bf-q.com` |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service-role key (server-only) |
+| `SUPABASE_JWT_SECRET` | Supabase JWT secret |
 
 ### Using Vercel Postgres (recommended)
 
@@ -264,10 +331,15 @@ src/
 │   ├── api/                # REST API endpoints
 │   │   ├── auth/           # NextAuth + registration
 │   │   ├── health/         # Health check endpoint (no DB)
+│   │   ├── me/             # Current user (Supabase JWT / session)
+│   │   ├── admin/users/    # Admin user list (Supabase service key)
 │   │   ├── projects/       # CRUD projects
 │   │   ├── products/       # CRUD products
 │   │   ├── posts/          # CRUD posts
 │   │   └── contact/        # Contact form handler
+│   ├── auth/               # Supabase auth pages (login / signup)
+│   ├── dashboard/          # Protected user dashboard
+│   ├── admin/              # Admin panel (admin role required)
 │   ├── about/
 │   ├── services/
 │   ├── products/           # Listing + [slug] detail
@@ -276,16 +348,19 @@ src/
 │   ├── investors/
 │   ├── partners/
 │   ├── contact/
-│   └── portal/             # login / signup / dashboard / admin
+│   └── portal/             # legacy NextAuth portal (login / signup / dashboard / admin)
 ├── components/
 │   ├── layout/             # Navbar, Footer
 │   ├── sections/           # Hero, TechPillars, ProductSlider
 │   └── ui/                 # Button, Card, Badge, Input, Textarea
 ├── lib/
+│   ├── supabase/           # Supabase client utilities
+│   │   ├── client.ts       # Browser client
+│   │   └── server.ts       # Server client (async cookies)
 │   ├── auth.ts             # NextAuth configuration
 │   ├── prisma.ts           # Prisma client singleton
 │   └── utils.ts            # cn(), formatDate(), slugify()
-└── middleware.ts            # Security headers + route protection
+└── middleware.ts            # Security headers + Supabase/NextAuth route protection
 prisma/
 ├── schema.prisma
 └── seed.ts

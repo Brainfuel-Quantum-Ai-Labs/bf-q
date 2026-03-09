@@ -1,0 +1,29 @@
+{
+  "name": "bf-q-api",
+  "version": "1.0.0",
+  "description": "BrainFuel Quantum AI Labs — standalone REST API service (Railway)",
+  "private": true,
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20.17.6",
+    "eslint": "^8.57.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.6.3"
+  }
+}
