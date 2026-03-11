@@ -1,13 +1,22 @@
 import Image from "next/image";
 
-export default function BFQLogoWhite() {
+type BFQLogoWhiteProps = {
+  width?: number;
+  className?: string;
+};
+
+export default function BFQLogoWhite({
+  width = 180,
+  className,
+}: BFQLogoWhiteProps) {
   return (
     <Image
       src="/brainfuel-logo.png"
       alt="BrainFuel Quantum AI Labs"
-      width={180}
-      height={70}
+      width={width}
+      height={Math.round((width * 70) / 180)}
       priority
+      className={className}
     />
   );
 }
