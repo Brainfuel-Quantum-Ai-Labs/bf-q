@@ -1,16 +1,23 @@
-"use client";
+import Image from "next/image";
 
-type Props = {
+type BFQLogoWhiteProps = {
   width?: number;
+  height?: number;
   className?: string;
 };
 
-export default function BFQLogoWhite({ width = 40, className = "" }: Props) {
+export default function BFQLogoWhite({
+  width = 42,
+  height = 42,
+  className,
+}: BFQLogoWhiteProps) {
   return (
-    <img
+    <Image
       src="/brainfuel-logo.png"
-      alt="BrainFuel Quantum AI Labs"
+      alt="BrainFuel Quantum Ai Labs"
       width={width}
+      height={height}
+      priority
       className={className}
     />
   );
