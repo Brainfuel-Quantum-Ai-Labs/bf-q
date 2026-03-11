@@ -24,13 +24,24 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-gray-200 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <BFQLogoWhite width={40} className="rounded-lg" />
-            <span className="font-bold text-lg gradient-text hidden sm:block">BF-Q Labs</span>
+          {/* Brand */}
+          <Link href="/" className="flex items-center gap-3 min-w-0">
+            <BFQLogoWhite
+              width={42}
+              height={42}
+              className="object-contain shrink-0"
+            />
+            <div className="min-w-0 leading-tight">
+              <div className="font-bold text-sm sm:text-base text-slate-900 truncate">
+                BrainFuel
+              </div>
+              <div className="text-[10px] sm:text-xs tracking-[0.24em] uppercase text-slate-500 truncate">
+                Quantum Ai Labs
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -42,7 +53,7 @@ export function Navbar() {
                 className={cn(
                   "px-3 py-2 text-sm rounded-md transition-colors",
                   pathname === link.href
-                    ? "text-quantum-600 bg-quantum-50"
+                    ? "text-blue-600 bg-blue-50"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 )}
               >
@@ -55,16 +66,21 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/portal/login"
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-quantum-600 hover:bg-quantum-500 text-white transition-colors"
+              className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors"
             >
               Portal
             </Link>
+
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
@@ -82,17 +98,18 @@ export function Navbar() {
                 className={cn(
                   "px-4 py-3 text-sm rounded-md transition-colors",
                   pathname === link.href
-                    ? "text-quantum-600 bg-quantum-50"
+                    ? "text-blue-600 bg-blue-50"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 )}
               >
                 {link.label}
               </Link>
             ))}
+
             <Link
               href="/portal/login"
               onClick={() => setMobileOpen(false)}
-              className="mt-2 px-4 py-3 text-sm font-medium rounded-lg bg-quantum-600 hover:bg-quantum-500 text-white text-center transition-colors"
+              className="mt-2 px-4 py-3 text-sm font-medium rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-center transition-colors"
             >
               Portal →
             </Link>
